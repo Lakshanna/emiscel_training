@@ -1,4 +1,4 @@
-<frameset rows="20%,* border=none>
+<frameset rows="20%,*" border=none>
 <frame src="title.html">
 <frame src="table.html">
 </frameset>
