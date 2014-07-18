@@ -1,0 +1,8 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+def home(request):
+	mystr="<html><body background='fish.jpg'><marquee><h1><font color='red'>HELLO WORLD </font></h1></marquee></body></html>"
+	return HttpResponse(mystr)
+
