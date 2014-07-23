@@ -1,0 +1,11 @@
+fin=open("foo2.txt","w")
+fin.write("good  luck ")
+fin.write("good  luck ")
+fin.write("good  luck ")
+fin.write("not bad")
+fin.close()
+fin=open("foo2.txt")
+fin.seek(2)
+print fin.read()
+fin.close()
+
