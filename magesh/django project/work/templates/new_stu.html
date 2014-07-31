@@ -1,0 +1,10 @@
+
+{% extends 'base.html' %}
+{% block content %}
+{{x}}
+<form  action ='' method="POST">{% csrf_token %}
+{{f.as_p}}
+<input type='submit' value ="SUBMIT"/>
+</form>
+Do you want to<a href="/">go home</a> ?
+{% endblock %}

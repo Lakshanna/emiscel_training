@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<form  action ='/tea_entry' method="POST">{% csrf_token %}
+<select>
+<option>
+	
+</option>
+</select>
+{{tea_form.as_p}}
+<input type='submit' value ="SUBMIT"/>
+</form>
+Do you want to<a href="/">go home</a> ?
+{% endblock %}

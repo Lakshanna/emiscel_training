@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form  action =' ' method="POST">{% csrf_token %}
+ <label > ROLL NO   :{{ a.roll_no }}</label> <br><br>
+<label >NAME           :{{ a.name }}</label><br> <br>     
+<label > STD   :{{ a.std }}</label> <br><br>
+<label >SCHOOL           :{{ a.school }}</label> <br><br>
+<label >BLOCK   :{{ a.block }} </label><br><br> 
+<label > DISTRICT  :{{ a.district }}</label> <br><br>
+
+
+<input type="submit" name=" delete" value="Are you sure to delete" onclick="alert('your data is deleted')" /><br>
+
+</form>
+
+<a href="/">go to home</a>
+{% endblock %}
+
