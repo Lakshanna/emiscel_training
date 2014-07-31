@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form  action ='{% url "del_stu"  pk=pk %}' method="POST">{% csrf_token %}
+<b>The following entries are to be deleted</b>
+<p align="center">
+STUDENT ID : {{ a.studentid }}<br>
+STUDENT NAME : {{a.studnetname}}<br>
+FATHERSNAME:{{a.fathername}}<br>
+SCHOOLNAME:{{a.schoolname}}<br>
+CLASS:{{a.classes}}<br>
+COMPUTER:{{a.computer}}<br>
+PHYSICS:{{a.physics}}<br>
+CHEMISTRY:{{a.chemistry}}<br>
+MATHS:{{a.maths}}<br>
+TOTAL:{{a.total}}<br>
+<center><input type="submit" name=" delete" value="Are you sure to delete" onclick="alert('your data is deleted')" /><br>
+</center>
+
+</form>
+{% endblock %}
+
