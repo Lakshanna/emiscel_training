@@ -8,8 +8,8 @@ class studying(models.Model):
 	id = models.AutoField(primary_key = True)
 	standard = models.IntegerField()
 
-	# def __str__(self):
- #  		return self.standard
+	def __unicode__(self):
+		return self.standard
 
 
 
@@ -28,8 +28,8 @@ class student(models.Model):
 	bio = models.IntegerField()
 	tot = models.IntegerField()
 	
-	# def __str__(self):
- #  		return self.std
+	def __unicode__(self):
+		return self.std
 
 
 

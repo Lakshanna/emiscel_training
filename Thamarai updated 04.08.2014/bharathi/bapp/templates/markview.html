@@ -31,22 +31,22 @@
   
  {% if pk %}
  
-<td>{{adeddatas.uid}}</td> <br>
-	<td>{{adeddatas.name}}</td> <br>
-	<td>{{adeddatas.fname}}</td> <br>
-	<td>{{adeddatas.school}}</td> <br>
-	<td>{{adeddatas.std}}</td> <br>
-	<td>{{adeddatas.tam}}</td> <br>
-	<td>{{adeddatas.eng}}</td> <br>
-	<td>{{adeddatas.mat}}</td> <br>
-	<td>{{adeddatas.phy}}</td> <br>
-	<td>{{adeddatas.chem}}</td> <br>
-	<td>{{adeddatas.bio}}</td> <br>
-	<td>{{adeddatas.tot}}</td> <br>
+<td>{{bs.uid}}</td> <br>
+	<td>{{bs.name}}</td> <br>
+	<td>{{bs.fname}}</td> <br>
+	<td>{{bs.school}}</td> <br>
+	<td>{{bs.std}}</td> <br>
+	<td>{{bs.tam}}</td> <br>
+	<td>{{bs.eng}}</td> <br>
+	<td>{{bs.mat}}</td> <br>
+	<td>{{bs.phy}}</td> <br>
+	<td>{{bs.chem}}</td> <br>
+	<td>{{bs.bio}}</td> <br>
+	<td>{{bs.tot}}</td> <br>
 	
 	
 {% else %}
-	{% for i in adeddatas %}
+	{% for i in bs %}
 	<tr>
 	<td>{{i.uid}}</td> <br>
 	<td>{{i.name}}</td> <br>
@@ -73,6 +73,8 @@
 <br>
 <br>
 <a href="/home"><input type="button" style="background-color:red"value="GO TO HOME PAGE">
+
+<a href="{% url 'entry' %}">GO TO Student Entry</a><br>
 
 </body>
 </html>

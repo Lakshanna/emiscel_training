@@ -137,6 +137,24 @@ class view(View):
 		return render(request,'view.html',{'adeddatas':adeddata,})
 
 
+class markview(View):
+	def get(self,request,**kwargs):
+		b = student.objects.all().order_by('-tot')
+		return render(request,'markview.html',{'bs':b,})
+	def post(self,request,**kwargs):
+		b = student.objects.all().order_by('-tot')
+		return render(request,'markview.html',{'bs':b,})
+
+
+class classview(View):
+	def get(self,request,**kwargs):
+		b = student.objects.all().order_by('std')
+		return render(request,'classview.html',{'bs':b,})
+	def post(self,request,**kwargs):
+		b = student.objects.all().order_by('std')
+		return render(request,'classview.html',{'bs':b,})
+
+
 
 class delete(View):
 	def get(self,request,**kwargs):

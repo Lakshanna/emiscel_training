@@ -12,7 +12,9 @@ urlpatterns = patterns('',
     url(r'^logout/$','bapp.views.userlogout',name='userlogout'),
     url(r'^admin/', include(admin.site.urls)),
     url(r"^bapp/", include("bapp.urls")),
-    url(r'^view/$', view.as_view()),	      
+    url(r'^view/$', view.as_view()),
+    url(r'^markview/$', markview.as_view()),
+    url(r'^classview/$', classview.as_view()),	      
 )
     
     
