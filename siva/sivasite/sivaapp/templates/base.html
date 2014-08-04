@@ -1,0 +1,170 @@
+
+
+<html>
+<head>
+	
+<!-- <link rel="stylesheet" type="text/css" href="home.css"> -->
+<style>
+{% block style %}/* Stylesheet 2: */
+body {
+    font-family: Arial;
+    background-color: #d14836;
+    line-height: 20px;
+}
+
+.container {
+    min-width: 900px;
+}
+
+#menulist {
+    padding:0;
+    font: 16px verdana;
+}
+
+.wrapper {
+    position: relative;
+    overflow: auto;
+}
+
+#top {
+    color: #ffffff;
+    padding: 15px;
+    font-size: 30px;
+}
+
+#menubar {
+    width: 190px;
+    float: right;
+}
+
+#main {
+    padding: 50px;
+    background-color: #ffffff;
+    font: 80% Verdana;
+}
+
+#main h1, #main h2 {
+    color: #d14836;
+}
+
+#sidebar {
+    background-color: #F6DAD7;
+    color: #d14836;
+    padding: 10px;
+}
+
+#bottom {
+    text-align: center;
+    padding: 10px;
+    font-size: 70%;
+    color: #ffffff;
+}
+
+#menubar 1{
+    width: 200px;
+    float: right;
+}
+#menulist1 {
+    padding:0;
+    font: 16px verdana;
+}
+#menulist1{
+    margin: 0;
+    padding: 0;
+}
+
+.menuitem1 {
+    width: 155px;
+    background-color: #32a4e7;
+    border: 1px solid #d4d4d4;
+    border-radius: 40px;    
+    list-style-type: none;
+    padding: 2px;
+    text-align: center;
+
+    
+    cursor: pointer;
+}
+.menuitem1:hover {
+    background-color: #ffffff;
+}
+
+
+.menuitem {
+    width: 155px;
+    background-color: #d14836;
+    border: 1px solid #d14836;
+    border-radius: 40px;
+    color: #ffffff;
+    list-style-type: none;
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.menuitem:hover {
+    background-color: #ffffff;
+    color: #d14836;
+}
+
+a {
+    color: #d14836;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+{% endblock %}
+</style> 
+	<title>SIVA'S  - {% block title %}{% endblock %}</title>
+</head>
+<body>
+<div class="container wrapper">
+  <div id="top">
+    <h1>Welcome to My Homepage</h1>
+    <h2>Hi {{username}}</h2>
+	<p>{% block head %}{% endblock %}</p>
+     
+  </div>
+  <div class="wrapper">
+    <div id="menubar">
+	  <ul id="menulist">
+
+	  	
+		<a href="/home"><li class="menuitem" >HOME</li></a>	
+		<a href="/list"/><li class="menuitem" >STUDENT DATA</li></a>
+		<a href="/add"/><li class="menuitem" >NEW DATA</li></a>
+		<a href="/list"/><li class="menuitem" >EDIT DATA</li></a>
+		<a href="/list"/><li class="menuitem" >DELETE DATA</li></a>
+		<a href="/loginout"/><li class="menuitem" >LOGOUT</li></a>	
+		
+	  </ul>
+    </div>
+    
+    
+    <div id="main">
+      
+	  <p>
+		{% block main %}
+{% endblock %}
+	  </p>
+   </div>
+    <div id="sidebar">
+      <h3>Student Marks Entry</h3>
+	  <p>
+		Website Consists of Student details with Marks of five subject in classwise
+	  </p>
+    </div>
+  </div>
+  <div id="bottom">
+	Copyrights  © EMIS CELL  Created by - Sivakumar
+  </div>
+</div>
+
+
+
+</body>
+
+</html>
