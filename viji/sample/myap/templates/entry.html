@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EMIS Entry Form </title>
+</head>
+<body>
+<div id="stats">
+<!-- STATS: Total: %(totTime).2f Python: %(pyTime).2f DB: %(dbTime).2f Queries: %(queries)d -->
+
+</div>
+<form action="" method = POST> {% csrf_token %}
+
+STUDENT NAME  	: <input type="text" name="name"/> <br>
+FATHER'S NAME 	: <input type="text" name="fname"/> <br>
+AGE				: <input type="number" name="age"/> <br>
+SEX           	: <input type="radio" name="sex" value = 'm' checked=1 />Male <input type="radio" name="sex" value = 'f'/>Female <br>
+IS SPL. CHILD 	: <input type="checkbox" name="splchi"/> <br>
+PHOTO         	: <input type="file" name="photo"/> <br>
+EMAIL         	: <input type="email" name="email"/> <br>
+
+<input type = "submit" value = 'submit this form'/>
+</form>
+
+
+</body>
+</html>

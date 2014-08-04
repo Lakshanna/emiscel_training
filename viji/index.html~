@@ -7,8 +7,11 @@
 <h2>This is line 2</h2>
 <h3>This is line 3</h3>
 
-<marquee> HaVE A nicE DAY </marquee>
+<marquee><h2> HAVE A NICE DAY </h2></marquee>
 <body>
+Enter Your Name<input type="text" name="CName"><br>
+Enter the radium <input type="text" name ="radius"><br>
+
 </body>
 </html>
 

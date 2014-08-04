@@ -1,0 +1,26 @@
+<html>
+<head>
+</head>
+<body>
+<div id="stats">
+<!-- STATS: Total: %(totTime).2f Python: %(pyTime).2f DB: %(dbTime).2f Queries: %(queries)d -->
+
+</div>
+{% if pk %}
+<td>{{student_list.uid}}</td> <br>
+	<td>{{student_list.name}}</td> <br>
+	<td>{{student_list.fname}}</td> <br>
+	<td>{{student_list.mother_tongue}}</td><br>
+	<td>{{student_list.nationality}}</td><br>
+{% else %}
+	{% for data in student_list %}
+	<td>{{data.uid}}</td> <br>
+	<td>{{data.name}}</td> <br>
+	<td>{{data.fname}}</td> <br>
+	<td>{{data.mother_tongue}}</td><br>
+	<td>{{data.nationality}}</td><br>
+<a href='{% url "students_detail_update" pk=data.uid %}'>Edit</a>
+	{% endfor %}
+	{% endif %}
+	</body>
+</html>

@@ -1,0 +1,9 @@
+<html>
+<!-- STATS: Total: %(totTime).2fs Python: %(pyTime).2fs DB: %(dbTime).2fs
+Queries: %(queries)d ENDSTATS -->
+<form action='' method ='POST' >
+	{% csrf_token %}
+{{form_details.as_p}}
+<input type="submit" value="Create" />
+</form>
+</html>
