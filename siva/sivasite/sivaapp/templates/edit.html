@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Studend Edit Page{% endblock %}
+
+{% block main %}
+<body>
+<h1>Edit the Student details</h1>
+<form action='{% url "update" pk=pk1 %}' method ='POST' enctype="multipart/form-data">
+{% csrf_token %}
+<ul id="menulist">
+
+	  	
+<li>First Name  <input type ="text" name='first_name'  value="{{form_details.first_name}}"/></li>
+
+<li>Last Name  <input type='text' name='last_name'  value="{{form_details.last_name}}"/></li>
+<li>   Email   <input type='text' name='email_id'  value="{{form_details.email_id}}"/></li>	
+<li>Hostler <input type='checkbox' name='hostler'  value="{{form_details.hostler}}"/></li>	
+<li>Sex {{ form_details.sex }}<select name="sex" value="{{ form_details.sex }}">
+{% for i in form_details.sex %}
+<option>{{i}}</option>
+{% endfor %}
+</select><br><br></li>	
+<li>Date <input type='text' name='date'  value="{{form_details.date}}"/></li>	
+<li>Photo <input type='file' name='photo_img'  value="{{form_details.photo_img}}"/></li>
+<li>Class {{ form_details.classes }}<select name="sex" value="{{ form_details.classes }}">
+{% for i in pk %}
+<option>{{i}}</option>
+{% endfor %}
+</select><br><br></li>	
+<li>English <input type='text' name='english'  value="{{form_details.english}}"/></li>
+<li>Tamil <input type='text' name='tamil'  value="{{form_details.tamil}}"/></li>
+<li>Maths<input type='text' name='maths'  value="{{form_details.maths}}"/></li>
+<li>Science<input type='text' name='science'  value="{{form_details.science}}"/></li>
+<li>Social <input type='text' name='social'  value="{{form_details.social}}"/></li>	
+		
+	  </ul>
+
+<input class="menuitem"type="submit" value="update" />
+</form>
+
+</body>{% endblock  %}

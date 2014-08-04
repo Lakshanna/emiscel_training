@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<!-- <div id="container" style="width:100%"> -->
+
+<div id="titlebar" style="background-color:#FFCCFF;">
+<img src="/site_media/media/senthil.jpeg">
+<h1 align = "center" style="margin-bottom:0;">EDUCATION MANAGEMENT INFORMATION SYSTEM</h1></div>
+
+<div id="logstatbar" align = 'right' style="background-color:#FFCCFF;">WELCOME {{username}}{{uname}}
+</div>
+<div id = "menu">
+<style>
+ul {
+	height: auto;
+    list-style-type: none;
+    margin: 0px;
+    padding: 8px 0px;
+}
+ul{
+    width: 100%;
+    height: 20px;
+    font-size: 16px;
+    font-family: Tahoma, Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 3px 2px 3px #333333;
+    background-color: #FFCCFF;
+    border-radius: 8px;
+}
+li{
+display: inline;
+width: 30%;
+padding: 50px;
+}
+a{
+	text-decoration:none;
+    color:#999999;
+    text-shadow:8px 8px 8px #FFCC99;
+}
+a:hover {
+	color:#fffff;
+    text-shadow:1px 1px 10px #CCC;
+}
+</style>
+
+<ul>
+	<li><a href='/entscr'>Entry</a></li>
+	<li><a href='/viewscr'>View</a></li>  
+	<li><a href='/edit'>Edit</a></li>
+	<li><a href='/delete'>Delete</a></li>
+	<li><a href='/logot'>LOGOUT USER</a></li>
+</ul>
+</div>
+
+<!-- <div id="menubar" style = "background-color:#FFCCFF;">
+<table width=100% align='center'><tr>
+	<td><a href='/entscr'>Entryyy</a></td>
+	<td><a href='/viewscr'>Viewww</a></td>  
+	<td><a href='/edit'>Edit</a></td>
+	<td><a href='/delete'>Delete</a></td>
+	<td><a href='/logot'>LOGOUT USER</a></td></tr>
+</table>
+</div> -->
+{% block content %}
+
+
+<div id="content" style="background-color:#FFCCFF;">
+information about us</div>
+{% endblock %}
+<div id="footer" style="background-color:#FFCCFF;clear:both;text-align:center;">
+Copyright © tnemis.com</div>
+</div>
+</body>
+</html> 

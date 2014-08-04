@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EMIS - LOGIN</title>
+</head>
+<body bgcolor="FFDBFB">
+<br>
+<CENTER><h2><strong>Educational Management Information System</h2></CENTER></strong><BR><BR><CENTER>
+<h3>SIGN IN</h3></CENTER>
+<form action="" method = "POST"> 
+{% csrf_token %} 
+<br>
+<center>USER NAME <input type="text" name="username"/> <br>
+<br>
+PASS WORD <input type="password" name="password"/> <br>
+<br>
+<input type = "submit" value = 'SIGN IN'/><br>  
+New User?  <a href="/loging">SIGN UP</a> Here</center>
+</form>
+</body>
+</html>

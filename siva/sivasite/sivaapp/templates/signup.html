@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{% endblock %}
+
+{% block main %}
+<body>
+<h1>Signup For the New Login Account</h1>
+<form id="login_form" method="post" action="">
+{% csrf_token %}
+<fieldset>
+                <ul>
+                    {{user_form.as_ul}} {{signup_form.as_ul}}
+                    
+                                    </ul>
+                                    <input class='menuitem'type="submit" value="Signup" />
+            </fieldset>
+ 
+
+	
+    </div>
+</form>
+
+</body>
+{% endblock %}
