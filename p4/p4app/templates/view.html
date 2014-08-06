@@ -1,0 +1,71 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>view</title>
+</head>
+<body> -->
+{% extends "welcome.html" %}
+{% block content %}
+<table border='1'>
+<center>
+<tr>
+<th>S ID</th>
+<th>Name</th>
+<th>F Name</th>
+<th>School</th>
+<th>Class</th>
+<th>Tamil</th>
+<th>English</th>
+<th>Maths</th>
+<th>Science</th>
+<th>Social</th>
+<th>Total</th>
+<th>Update</th>
+<th>Update</th>
+
+</tr>
+{% if pk %}
+
+	<td>{{marklist.sid}}</td>
+	<td>{{marklist.name}}</td>
+	<td>{{marklist.father_name}}</td>
+	<td>{{marklist.school}}</td>
+	<td>{{marklist.std}}</td>
+	<td>{{marklist.tamil}}</td>
+	<td>{{marklist.english}}</td>
+	<td>{{marklist.maths}}</td>
+	<td>{{marklist.science}}</td>
+	<td>{{marklist.social}}</td>
+	<td>{{marklist.total}}</td>
+</center>
+{% else %}
+	{% for m in marklist %}
+	<tr>
+	<center>
+		<td>{{m.sid}}</td></center>
+		<td>{{m.name}}</td>
+		<td>{{m.father_name}}</td>
+		<td>{{m.school}}</td>
+		<td>{{m.std}}</td>
+		<td>{{m.tamil}}</td>
+		<td>{{m.english}}</td>
+		<td>{{m.maths}}</td>
+		<td>{{m.science}}</td>
+		<td>{{m.social}}</td>
+		<td>{{m.total}}</td>
+		
+
+
+<td><a href='{% url "myedit" pk=m.sid %}'>Edit</a></td>
+<td><a href='{% url "delete" pk=m.sid %}'>Delete</a></td>
+</tr>
+	{% endfor %}
+	{% endif %}
+</table><br><br>
+<a href = '/welcome'>Go Home</a>
+
+<a href='{% url "myentry" %}'>NEW ENTRY</a><BR>
+{% endblock %}
+
+<!-- </body>
+</html> -->

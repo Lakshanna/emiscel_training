@@ -1,0 +1,17 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body> -->
+{% extends "welcome.html" %}
+{% block content %}
+<form action ='{% url "delete" pk=pk1 %}' method = 'POST'>
+{% csrf_token %}
+"Delete the Record"
+<input type = 'submit' value ="delete"/><br><br>
+<br>
+<a href ='/welcome'> Go Home </a>
+{% endblock %}
+<!-- </body>
+</html> -->

@@ -1,0 +1,34 @@
+{% extends "welcome.html" %}
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+ -->
+  {% block content%}
+{{form.errors}}
+<form action='' method = 'POST'>{% csrf_token %}
+
+
+Student id : <input type ='text' name="sid" value="{{markdetails.sid}}"><br>
+Student Name : <input type ='text' name="name" value="{{markdetails.name}}"><br>
+Fathers Name : <input type ='text' name="father_name" value="{{markdetails.father_name}}"><br>
+School : <input type ='text' name="school" value="{{markdetails.school}}"><br>
+Class : <input type ='text' name="std" value="{{markdetails.std}}"><br>
+Tamil : <input type ='text' name="tamil" value="{{markdetails.tamil}}"><br>
+English : <input type ='text' name="english" value="{{markdetails.english}}"><br>
+Maths : <input type ='text' name="maths" value="{{markdetails.maths}}"><br>
+Science : <input type ='text' name="science" value="{{markdetails.science}}"><br>
+Social : <input type ='text' name="social" value="{{markdetails.social}}"><br>
+Total : <input type ='text' name="total" value="{{markdetails.total}}"><br>
+
+<input type ="submit" value="Update" /><br>
+</form>
+
+<input type ="submit" value="delete" /><br>
+
+{% endblock%}
+<!-- </body>
+</html> -->

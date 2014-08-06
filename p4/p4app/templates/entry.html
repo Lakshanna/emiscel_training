@@ -1,0 +1,28 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body> -->
+{% extends "welcome.html" %}
+{% block content %}
+<form action ='' method='POST'>{% csrf_token %}
+
+
+{{ rk.as_p }}
+
+
+<input type='submit' value = 'save' name ='save'/></center></div>
+</form>
+
+
+<a href = '/welcome'>Go Home</a>
+{% endblock %}
+
+
+
+<!-- </body>
+</html>
+ -->
+
+
