@@ -1,0 +1,17 @@
+<html>
+<body background="/helloapp/fish.jpg">
+
+	<marquee><h1><font color='red'>HELLO WORLD </font>
+	</h1></marquee>
+
+	<br>
+<center>
+{% for x,y in a.items %}
+  
+    {{ x }} {{y}}<br>
+  
+{% endfor %}
+<a href='http://localhost:8000/contacts'>contacts</a>
+</center>
+</body>
+</html>

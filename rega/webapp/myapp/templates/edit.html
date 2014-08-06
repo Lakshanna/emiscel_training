@@ -1,0 +1,15 @@
+<html>
+<head>
+</head>
+<body>
+	<form action='{% url "students_detail_update" pk=pk1 %}' method ='POST' >
+{% csrf_token %}
+Uid: <input type="text" name="uid" value="{{form_details.uid}}"><br>
+Name: <input type="text" name="name" value="{{form_details.name}}"><br>
+Gender: <input type="text" name="gender" value="{{form_details.gender}}"><br>
+Mothertongue: <input type="text" name="mother_tongue" value="{{form_details.mother_tongue}}"><br>
+Nationality: <input type="text" name="nationality" value="{{form_details.nationality}}"><br>
+<input type="submit" value="Update" /><br>
+</form>
+	</body>
+</html>

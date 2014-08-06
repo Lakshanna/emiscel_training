@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<form  action =' ' method="POST">{% csrf_token %}
+ROLL NUMBER : <input type='number' name='roll_no' value={{ a.roll_no }}><br><br>
+NAME        : <input type='text' name='name' value={{ a.name }}><br><br>
+STANDARD :{{ a.std }}  <select name="std" value={{ a.std }}>
+{% for i in std %}
+<option>{{i}}</option>
+{% endfor %}</select><br><br>
+
+SELECT SCHOOL :{{ a.school }}<select name="school" value={{ a.school }}>
+{% for i in sch %}
+<option>{{i}}</option>
+{% endfor %}
+</select><br><br>
+
+SELECT BLOCK :{{ a.block }}<select name="block" value = {{ a.block }}>
+{% for i in bloc %}
+<option>{{i}}</option>
+{% endfor %}
+</select><br><br>
+
+SELECT DISTRICT :{{ a.district }}<select name="district" value={{ a.district }}>
+{% for i in dist %}
+<option>{{i}}</option>
+{% endfor %}	
+</select>
+<br><br>
+MARKS : <input type='number' name='mark' value= {{ a.marks }}></br>
+<input type="submit" name="save" value="save" onclick="alert('your data is updated')" />
+ 
+<a href="/">go to home</a>
+{% endblock %}

@@ -1,0 +1,46 @@
+    <!DOCTYPE html>
+<html>
+<body style=" ">
+
+
+<div id="container" style="width:100%">
+<div id="stats">
+<!-- STATS: Total: %(totTime).2f Python: %(pyTime).2f DB: %(dbTime).2f Queries: %(queries)d -->
+
+</div>
+
+<div id="header" style="background-color:#CC99FF;"> 
+<CENTER>
+<h1 style='Filter: glow()'><font color=blue>Student Details Monitering System 
+<br>
+(SDMS)</font></h1></div>
+<div id="statusbar" style="background-color:#FFCCcc;height:20px;width:1000px;float:top;">
+{% block userdetails %}<b>
+<p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome {{ username }} {{ uname }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/logot">Logout</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/home1">Go home</a></p></b>
+
+{% endblock %}
+</div>
+
+<div id="menubar" style="background-color:#FFCCFF;height:50px;width:1000px;float:top;">
+
+      <table width="100%"><tr><td><a href='/new_stu'><input type="submit" value="Create New Student" /></a></td>
+	  <td align="right"><a href='/view_stu'><input type="submit" value='View an Existing Student'> </a></td><td>
+	  </tr></table>
+	  </div>
+
+
+
+{% block content %}
+<div id="content" style="background-color:white;height:1000px;width:100px;float:right;">
+information about us</div>
+{% endblock %}
+
+
+<div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+Copyright © THAVAMANI</div>
+
+</div>
+
+</body>
+</html> 
+

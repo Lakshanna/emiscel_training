@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>student details : </h1>
+<table border="1" style="width:300px">
+<tr>
+
+<th>ROLL NO</th>
+<th>ADMISSION DATE</th>
+<th>FIRST NAME</th>
+<th>LAST NAME</th>
+<th>IS SPL STUDENT</th>
+<th>PHOTO</th>
+<th>EMAIL</th>
+</tr>
+
+{% for i in b %}
+<tr>
+
+<td><b>{{i.roll_no}} </b> </td>
+<td><b>{{i.admin_dt}} </b> </td>
+<td><b>{{i.fname}} </b> </td>
+<td><b>{{i.lname}} </b> </td>
+<td><b>{{i.is_spl_stu}} </b> </td>
+<td><b><img src="site_media/media/{{i.photo}}" height="50" width="50" ></img></b> </td>
+<!-- <td> <b>{{i.email}}</b></td> -->
+</tr>
+
+{% endfor %}
+</table>
+
+<a href="/">go to home</a>
+{% endblock %}
+
+           
+    
+       
+         
+    
+             
+   

@@ -1,0 +1,42 @@
+<html>
+<script>
+function goBack() {
+    window.history.back()
+}
+</script>
+
+
+
+
+<head><title>Questions</title></head>
+
+<body><table border="1" align="center"><tr><td>
+{% if pk %}
+<table cellspacing="5" cellpadding="=5" border="1"><tr><th colspan="5" align="center">QUSTIONS</th></tr>
+<tr><th>Q.No</th><th>Subject</th><th>Questions</th>
+<tr>
+<td>{{qplist.Qid}}</td>
+<td>{{qplist.Subject}}</td>
+<td>{{qplist.Question}}</td>
+</tr>
+</table>
+
+{% else %}
+	<table cellspacing="5" cellpadding="=5" border="1"><tr><th colspan="5" align="center">QUSTIONS</th></tr>
+<tr><th>Q.No</th><th>Subject</th><th>Questions</th><th colspan="2">Click to Change</th></tr>
+	{% for q in qplist %}
+
+	<tr>
+		<td>{{q.Qid}}</td>
+		<td>{{q.Subject}}</td>
+		<td>{{q.Question}}</td>
+		<td><a href='{% url "qpupdate" pk=q.Qid %}'>Edit</a></td>
+		<td><a href='{% url "qpdelete" pk=q.Qid %}'>Delete</a>
+	</tr>
+	{% endfor %}
+{% endif %}
+</table></td></tr><tr><th colspan="5" align="center"><body>
+<button onclick="goBack()">Go Back</button>
+</body>
+</th></tr></table>
+</body></html>

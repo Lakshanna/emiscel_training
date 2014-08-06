@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<center><img src="/site_media/media/emis.png"></center>
+
+ <h1><center> New child Entry </center></h1>
+
+	<title> EMIS-new entry</title>
+</head>
+<body bgcolor="yellow">
+
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+
+Uid:<input type="number" name="uid" value="{{uid}}"><br>
+Name:<input type="text" name="name" value="{{name}}"><br>
+FatherName: <input type="text" name="fname" value="{{fname}}"><br>
+School:<input type="text" name="school" value="{{school}}"><br>
+Class: <select name="std"> 
+{% for i in a %}}
+	<option> {{i.standard}}</option>>
+{% endfor %}
+</select><br>
+Tamil:<input type="number" name="tam" value="{{tam}}"><br>
+English:<input type="number" name="eng" value="{{eng}}"><br>
+Maths:<input type="number" name="mat" value="{{mat}}"><br>
+Physics:<input type="number" name="phy" value="{{phy}}"><br>
+Chemistry:<input type="number" name="chem" value="{{chem}}"><br>
+Biology:<input type="number" name="bio" value="{{bio}}"><br>
+Total:<input type="number" name="tot" value="{{tot}}"><br>
+
+
+<li><input type="submit" value="submit"/>
+
+
+<a href="/home"><input type="button" style="background-color:blue"value="GO TO HOME PAGE"></li>
+</form>
+
+</body>
+</html>

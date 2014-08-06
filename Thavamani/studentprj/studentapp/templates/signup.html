@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body bgcolor="122343" text="white"><center>
+<h3><b><u>CREATE ACCOUNT</u></b></h3>
+<form action="" method="POST">
+{% csrf_token %}
+{{ a.as_p }}
+{{ b.as_p }}
+<input type="submit" value="Create User" />
+</form>
+</body>
+</html>

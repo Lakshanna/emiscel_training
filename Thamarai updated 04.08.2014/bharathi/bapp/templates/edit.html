@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<li>
+<body bgcolor="#736AFF">
+
+{{form.errors}}
+
+<form action='' method ='POST' >
+{% csrf_token %}
+Uid: <input type="text" name="uid" value="{{instances.uid}}"><br>
+Name: <input type="text" name="name" value="{{instances.name}}"><br>
+FatherName: <input type="text" name="fname" value="{{instances.fname}}"><br>
+School: <input type="text" name="school" value="{{instances.school}}"><br>
+Class: <select name="std"> 
+{% for i in a %}}
+	<option> {{i.standard}}</option>
+{% endfor %}
+</select><br>
+Tamil:<input type="text" name="tam" value="{{instances.tam}}"><br>
+English:<input type="text" name="eng" value="{{instances.eng}}"><br>
+Maths:<input type="text" name="mat" value="{{instances.mat}}"><br>
+Physics:<input type="text" name="phy" value="{{instances.phy}}"><br>
+Chemistry:<input type="text" name="chem" value="{{instances.chem}}"><br>
+Biology:<input type="text" name="bio" value="{{instances.bio}}"><br>
+Total:<input type="text" name="tot" value="{{instances.tot}}"><br>
+
+
+
+<input type="submit" value="Update" /><br>
+</form>
+
+
+<input type="submit" name="save" value="save" />
+<input type="submit" name="delete" value="delete" /> 
+
+<a href="/home"><input type="button" style="background-color:yellow"value="GO TO HOME PAGE">
+<a href="{% url 'entry' %}"><input type="button" style="background-color:yellow"value="GO New Entry">
+</body>
+</html>

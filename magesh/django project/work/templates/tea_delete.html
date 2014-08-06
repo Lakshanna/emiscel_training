@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form  action =' ' method="POST">{% csrf_token %}
+<!-- TEACHER NAME       : <input type='text' name='name' value={{ a.name }}><br>
+AGE                : <input type='number' name='age' value={{ a.age }}><br>
+
+DATE OF JOIN       : <input type='date' name='doj' value={{ a.doj|date:"Y-m-d" }}><br> -->
+
+
+
+<label >TEACHER NAME   :{{ a.name }}</label> <br><br>
+<label >AGE            :{{ a.age }}</label> <br><br>
+<label >DATE OF JOIN   :{{ a.doj|date:"Y-m-d" }} </label><br><br> 
+
+<input type="submit" name=" delete" value="Are you sure to delete" onclick="alert('your data is deleted')" /><br>
+
+</form>
+
+<a href="/">go to home</a>
+{% endblock %}
+

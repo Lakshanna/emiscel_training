@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Logout Page{% endblock %}
+{% block head %}You Have been Logged Out{% endblock %}
+{% block main %}
+<body>
+<h1>Login Again to enter Student details</h1>
+<form id="login_form" method="post" action="">
+{% csrf_token %}
+
+<b>UserName  <input type ="text" name="username" /><br><br>
+<b>Password      <input type="password" name="password" /> <br><br>
+
+
+	  
+	  <input class="menuitem"  type='submit' value='Login'>
+	  <a href="/signup" class="menuitem" >SIGNUP</li></a>
+	  
+
+</ul>
+    </div>
+</form>
+
+</body>
+{% endblock %}
