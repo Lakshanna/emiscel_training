@@ -1,0 +1,23 @@
+{% extends 'home.html' %}
+{% block content %}
+<!-- <img src="site_media/media/{{a.photo}}" height="100" width="10" ></img>
+ -->
+<center>
+<h3><b>UPDATE STUDENT DETAILS</b></h3>
+<form  action ='' method="POST">{% csrf_token %}
+
+STUDENT ID : <input type='text' name='sid' value={{ a.sid }}><br>
+
+STUDENT NAME : <input type='text' name='sname' value={{a.sname}}><br>
+FATHERSNAME:<input type="text" name='sfname' value={{a.sfather}}><br>
+SCHOOLNAME:<input type="text" name='sschool' value={{a.sschool}}><br>
+<!-- Class :<select name="sclass">
+<option value='{{a.sclass}}' selected>{{a.sclass}}</option>
+</select> -->
+CLASS:<input type="text" name='sclass' value='{{a.sclass_id}}'><br>
+<input type="submit" name="save" value="save" />
+ 
+
+</form></center>
+
+{% endblock %}

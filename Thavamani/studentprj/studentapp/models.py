@@ -34,7 +34,7 @@ class studenttable(models.Model):
     studnetname=models.CharField(max_length=30)
     fathername=models.CharField(max_length=30)
     schoolname=models.CharField(max_length=30)
-    classes=models.ForeignKey(class_studying1)
+    classes=models.ForeignKey(class_studying)
     computer=models.IntegerField()
     physics=models.IntegerField()
     chemistry=models.IntegerField()

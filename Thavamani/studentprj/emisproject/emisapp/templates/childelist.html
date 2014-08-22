@@ -1,0 +1,48 @@
+{% extends 'home.html' %}
+{% block content %}
+
+<h3>Child List </h3>
+<table border="1" style="width:100%">
+<tr>
+<th>I</th>
+<th>II</th>
+<th>III</th>
+<th>IV</th>
+<th>V</th>
+<th>VI</th>
+<th>VII</th>
+<th>VIII</th>
+<th>IX</th>
+<th>X</th>
+<th>XI</th>
+<th>XII</th>
+<th>Total</th>
+</tr>
+<tr align="center">
+<td><a href='{% url "edit_stu" pk=1 %}'>{{a1}}</a>
+</td>
+<td><a href='{% url "edit_stu" pk=2 %}'>{{a2}}</a></td>
+<td><a href='{% url "edit_stu" pk=3 %}'>{{a3}}</a></td>
+<td><a href='{% url "edit_stu" pk=4 %}'>{{a4}}</a></td>
+<td><a href='{% url "edit_stu" pk=5 %}'>{{a5}}</a></td>
+<td><a href='{% url "edit_stu" pk=6 %}'>{{a6}}</a></td>
+<td><a href='{% url "edit_stu" pk=7 %}'>{{a7}}</a></td>
+<td><a href='{% url "edit_stu" pk=8 %}'>{{a8}}</a></td>
+<td><a href='{% url "edit_stu" pk=9 %}'>{{a9}}</a></td>
+<td><a href='{% url "edit_stu" pk=10 %}'>{{a10}}</a></td>
+<td><a href='{% url "edit_stu" pk=11 %}'>{{a11}}</a></td>
+<td><a href='{% url "edit_stu" pk=12 %}'>{{a12}}</a></td>
+<td><a href=' '>{{total}}</a></td>
+</tr>
+</table>
+
+ 
+{% endblock %}
+
+           
+    
+       
+         
+    
+             
+   

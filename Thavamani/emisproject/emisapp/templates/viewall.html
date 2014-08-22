@@ -1,0 +1,68 @@
+{% extends 'home.html' %}
+{% block content %}
+<h3>Student Details : </h3>
+<table border="1" style="width:100%">
+<tr>
+
+
+<th>ID</th>
+<th>NAME</th>
+
+<th>COMM</th>
+<th>CERT</th>
+<th>REL</th>
+<th>LAN</th>
+<th>PHONE</th>
+<th>DIS</th>
+<th>DISABLED</th>
+<th>CASTE</th>
+<th>NATION
+<th>PIN
+<th>BLOOD
+<th>MOTHER
+<th>OCC
+<th>INCOME
+<th>FATHER
+<th>OCC
+<th>INCOME
+<th>CLASS
+
+</tr>
+
+<tr>
+<td>{{i.sid}}</td>
+<td><a href='{% url "edit_stu1" pk=i.sid %}'>{{i.sname}}</a> </td>
+
+<td>{{i.scomm}}</td>
+<td>{{i.scommcert}}</td>
+<td>{{i.srel}}</td>
+<td>{{i.slan}}</td>
+<td>{{i.sphone}}</td>
+<td>{{i.sdis}}</td>
+<td>{{i.sdabled}}</td>
+<td>{{i.scaste}}</td>
+<td>{{i.snation}}</td>
+<td>{{i.spin}}</td>
+<td>{{i.sbg}}</td>
+<td>{{i.smother}}</td>
+<td>{{i.smocc}}</td>
+<td>{{i.smincome}}</td>
+<td>{{i.sfather}}</td>
+<td>{{i.sfocc}}</td>
+<td>{{i.sfincome}}</td>
+<td>{{i.sclass}}</td>
+<td>{{i.ssection}}</td>
+<td>{{i.smedium}}</td>
+<td>{{i.sdistrict}}</td>
+<td>{{i.sblock}}</td>
+</tr>
+ </table>
+{% endblock %}
+
+           
+    
+       
+         
+    
+             
+   

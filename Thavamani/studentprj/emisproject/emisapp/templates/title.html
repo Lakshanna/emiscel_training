@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EMIS</title>
+</head>
+<body  bgcolor="" text="white"><CENTER>
+<h1 style='Filter: glow()'><font color='blue' face='Liberation Serif'>Education Management Information System
+<br>
+(EMIS)</font></h2>
+<table align="=center" width=100% >
+<tr>
+<td>
+<table bgcolor="0DD0E1" border="0" align="center" cellspacing="5" cellpadding="5">
+<form action='' method="POST">
+{% csrf_token %}
+
+<tr><td colspan="3" align="center"><h2><u>USER LOGIN</u></h2></td></tr>
+<tr>
+
+<td>User Name</td><td>:</td><td><input type="text" name="txtuname"></td></tr>
+<tr><td>Password</td><td>:</td><td><input type="password" name="txtpwd"></td></tr>
+<tr><td colspan="3" align="center"><input type="submit" value="Login"></td></tr>
+</form>
+
+<tr><td align="center" colspan="3"><b>New User?<a href="/signup">SIGN UP</a>here...</b></td></tr></table>
+</table>
+<img src='/home.jpg'>
+</CENTER>
+</h1>
+</body>
+</html>
