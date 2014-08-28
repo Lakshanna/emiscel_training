@@ -1,0 +1,2706 @@
+--
+-- PostgreSQL database cluster dump
+--
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE emisf10;
+ALTER ROLE emisf10 WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION PASSWORD 'md535e65766464eac33352ae0bed8d96021';
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION;
+CREATE ROLE ravi;
+ALTER ROLE ravi WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION PASSWORD 'md58fd6d455e6e03ab7ad19a9efd7750197';
+
+
+
+
+
+
+--
+-- Database creation
+--
+
+CREATE DATABASE db WITH TEMPLATE = template0 OWNER = postgres;
+REVOKE ALL ON DATABASE db FROM PUBLIC;
+REVOKE ALL ON DATABASE db FROM postgres;
+GRANT ALL ON DATABASE db TO postgres;
+GRANT CONNECT,TEMPORARY ON DATABASE db TO PUBLIC;
+GRANT ALL ON DATABASE db TO ravi;
+CREATE DATABASE emisf10 WITH TEMPLATE = template0 OWNER = emisf10;
+REVOKE ALL ON DATABASE template1 FROM PUBLIC;
+REVOKE ALL ON DATABASE template1 FROM postgres;
+GRANT ALL ON DATABASE template1 TO postgres;
+GRANT CONNECT ON DATABASE template1 TO PUBLIC;
+
+
+\connect db
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO ravi;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO ravi;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO ravi;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO ravi;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO ravi;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO ravi;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone NOT NULL,
+    is_superuser boolean NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(75) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO ravi;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO ravi;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO ravi;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO ravi;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO ravi;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO ravi;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- Name: district; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE district (
+    id integer,
+    code integer NOT NULL,
+    name character varying(20),
+    "timestamp" timestamp without time zone DEFAULT now(),
+    CONSTRAINT myuniqueconstraint CHECK (((code < 3399) AND (code > 3300)))
+);
+
+
+ALTER TABLE public.district OWNER TO ravi;
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    user_id integer NOT NULL,
+    content_type_id integer,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO ravi;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO ravi;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO ravi;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO ravi;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO ravi;
+
+--
+-- Name: p2app_marks; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE p2app_marks (
+    id integer NOT NULL,
+    s_name character varying(255) NOT NULL,
+    f_a1 integer NOT NULL,
+    f_a2 integer NOT NULL,
+    f_a3 integer NOT NULL,
+    f_a4 integer NOT NULL,
+    f_b1 integer NOT NULL,
+    f_b2 integer NOT NULL,
+    f_b3 integer NOT NULL,
+    f_b4 integer NOT NULL,
+    s_a integer NOT NULL,
+    e_i character varying(75) NOT NULL,
+    d_t date NOT NULL,
+    f_l character varying(100) NOT NULL,
+    t_m boolean NOT NULL,
+    e_m boolean NOT NULL,
+    f_a integer NOT NULL,
+    f_b integer NOT NULL,
+    f_aa integer NOT NULL,
+    t_o integer NOT NULL
+);
+
+
+ALTER TABLE public.p2app_marks OWNER TO ravi;
+
+--
+-- Name: p2app_marks1; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE p2app_marks1 (
+    id integer NOT NULL,
+    s_name character varying(255) NOT NULL,
+    f_a1 integer NOT NULL,
+    f_a2 integer NOT NULL
+);
+
+
+ALTER TABLE public.p2app_marks1 OWNER TO ravi;
+
+--
+-- Name: p2app_marks1_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE p2app_marks1_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.p2app_marks1_id_seq OWNER TO ravi;
+
+--
+-- Name: p2app_marks1_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE p2app_marks1_id_seq OWNED BY p2app_marks1.id;
+
+
+--
+-- Name: p2app_marks_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE p2app_marks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.p2app_marks_id_seq OWNER TO ravi;
+
+--
+-- Name: p2app_marks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE p2app_marks_id_seq OWNED BY p2app_marks.id;
+
+
+--
+-- Name: p2app_userprofile; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE p2app_userprofile (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    company character varying(100) NOT NULL,
+    website character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public.p2app_userprofile OWNER TO ravi;
+
+--
+-- Name: p2app_userprofile_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE p2app_userprofile_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.p2app_userprofile_id_seq OWNER TO ravi;
+
+--
+-- Name: p2app_userprofile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE p2app_userprofile_id_seq OWNED BY p2app_userprofile.id;
+
+
+--
+-- Name: p3app_stu; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE p3app_stu (
+    id integer NOT NULL,
+    sid character varying(5) NOT NULL,
+    name character varying(100) NOT NULL,
+    fathersname character varying(100) NOT NULL,
+    school character varying(200) NOT NULL,
+    district character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.p3app_stu OWNER TO ravi;
+
+--
+-- Name: p3app_stu_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE p3app_stu_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.p3app_stu_id_seq OWNER TO ravi;
+
+--
+-- Name: p3app_stu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE p3app_stu_id_seq OWNED BY p3app_stu.id;
+
+
+--
+-- Name: p4app_classstudying; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE p4app_classstudying (
+    id integer NOT NULL,
+    standard character varying(10) NOT NULL
+);
+
+
+ALTER TABLE public.p4app_classstudying OWNER TO ravi;
+
+--
+-- Name: p4app_classstudying_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE p4app_classstudying_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.p4app_classstudying_id_seq OWNER TO ravi;
+
+--
+-- Name: p4app_classstudying_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE p4app_classstudying_id_seq OWNED BY p4app_classstudying.id;
+
+
+--
+-- Name: p4app_student; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE p4app_student (
+    id integer NOT NULL,
+    sid integer NOT NULL,
+    name character varying(50) NOT NULL,
+    father_name character varying(50) NOT NULL,
+    school character varying(100) NOT NULL,
+    std_id integer NOT NULL,
+    tamil integer NOT NULL,
+    english integer NOT NULL,
+    maths integer NOT NULL,
+    science integer NOT NULL,
+    social integer NOT NULL,
+    total integer NOT NULL
+);
+
+
+ALTER TABLE public.p4app_student OWNER TO ravi;
+
+--
+-- Name: p4app_student_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE p4app_student_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.p4app_student_id_seq OWNER TO ravi;
+
+--
+-- Name: p4app_student_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE p4app_student_id_seq OWNED BY p4app_student.id;
+
+
+--
+-- Name: p4app_userprofile; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE p4app_userprofile (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    school character varying(100) NOT NULL,
+    district character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.p4app_userprofile OWNER TO ravi;
+
+--
+-- Name: p4app_userprofile_id_seq; Type: SEQUENCE; Schema: public; Owner: ravi
+--
+
+CREATE SEQUENCE p4app_userprofile_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.p4app_userprofile_id_seq OWNER TO ravi;
+
+--
+-- Name: p4app_userprofile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ravi
+--
+
+ALTER SEQUENCE p4app_userprofile_id_seq OWNED BY p4app_userprofile.id;
+
+
+--
+-- Name: school; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE school (
+    id integer,
+    code integer NOT NULL,
+    name character varying(20),
+    district integer,
+    "timestamp" timestamp without time zone DEFAULT now(),
+    CONSTRAINT school_code_check CHECK (((code > 330101) AND (code < 339999)))
+);
+
+
+ALTER TABLE public.school OWNER TO ravi;
+
+--
+-- Name: station; Type: TABLE; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE TABLE station (
+    id integer NOT NULL,
+    s_name text NOT NULL,
+    city text NOT NULL,
+    n_trains integer NOT NULL,
+    s_master character(50),
+    vg_pass real
+);
+
+
+ALTER TABLE public.station OWNER TO ravi;
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY p2app_marks ALTER COLUMN id SET DEFAULT nextval('p2app_marks_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY p2app_marks1 ALTER COLUMN id SET DEFAULT nextval('p2app_marks1_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY p2app_userprofile ALTER COLUMN id SET DEFAULT nextval('p2app_userprofile_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY p3app_stu ALTER COLUMN id SET DEFAULT nextval('p3app_stu_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY p4app_classstudying ALTER COLUMN id SET DEFAULT nextval('p4app_classstudying_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY p4app_student ALTER COLUMN id SET DEFAULT nextval('p4app_student_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY p4app_userprofile ALTER COLUMN id SET DEFAULT nextval('p4app_userprofile_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add group	3	add_group
+8	Can change group	3	change_group
+9	Can delete group	3	delete_group
+10	Can add user	4	add_user
+11	Can change user	4	change_user
+12	Can delete user	4	delete_user
+13	Can add content type	5	add_contenttype
+14	Can change content type	5	change_contenttype
+15	Can delete content type	5	delete_contenttype
+16	Can add session	6	add_session
+17	Can change session	6	change_session
+18	Can delete session	6	delete_session
+19	Can add marks	7	add_marks
+20	Can change marks	7	change_marks
+21	Can delete marks	7	delete_marks
+25	Can add userprofile	9	add_userprofile
+26	Can change userprofile	9	change_userprofile
+27	Can delete userprofile	9	delete_userprofile
+28	Can add stu	10	add_stu
+29	Can change stu	10	change_stu
+30	Can delete stu	10	delete_stu
+31	Can add classstudying	11	add_classstudying
+32	Can change classstudying	11	change_classstudying
+33	Can delete classstudying	11	delete_classstudying
+34	Can add student	12	add_student
+35	Can change student	12	change_student
+36	Can delete student	12	delete_student
+37	Can add userprofile	13	add_userprofile
+38	Can change userprofile	13	change_userprofile
+39	Can delete userprofile	13	delete_userprofile
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 39, true);
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$12000$1yaevIIEW5fO$XunLluPnYOVs+kU+BWVrbiM/3wsFdPmtYFvRPAxjhfM=	2014-07-09 17:14:34.497665+05:30	t	ravi				t	t	2014-07-09 17:14:34.497665+05:30
+3	pbkdf2_sha256$12000$fYLYxoVGsFZ6$06W/xN6YUmc5rNXROtGzeFqeAAuWW9lvSdMKVRW0kI8=	2014-07-16 12:10:23+05:30	f	vijayan			vijay@gmail.com	f	t	2014-07-16 12:10:23+05:30
+2	pbkdf2_sha256$12000$VuvGWxhcguCo$iu2HKOm/caV/jzITBf3qHK4Cy9UvKSA10ioTnbcApSM=	2014-08-06 11:50:54.517336+05:30	t	ravi123				t	t	2014-07-14 10:50:29.593775+05:30
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 3, true);
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: district; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY district (id, code, name, "timestamp") FROM stdin;
+1	3301	Kanchipuram	2014-07-10 11:10:23.015622
+2	3302	Vellore	2014-07-10 11:11:59.415468
+3	3303	Thiruvellore	2014-07-10 11:12:22.776342
+4	3304	Thiruvannamalai	2014-07-10 11:12:40.122121
+5	3305	Villupuram	2014-07-10 11:13:05.425284
+6	3306	Erode	2014-07-10 12:19:25.667975
+7	3307	Kanyakumari	2014-07-10 12:19:44.288879
+8	3308	Dharmapuri	2014-07-10 12:20:02.269204
+9	3309	Salem	2014-07-10 12:20:25.923011
+10	3310	Namakkal	2014-07-10 12:20:42.222243
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, object_repr, action_flag, change_message) FROM stdin;
+1	2014-07-15 15:49:34.055544+05:30	2	9	1	ravi	1	
+2	2014-07-16 12:13:53.222839+05:30	2	4	3	vijayan	2	Changed is_staff.
+3	2014-07-16 12:14:01.872306+05:30	2	4	3	vijayan	2	Changed is_staff.
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 3, true);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY django_content_type (id, name, app_label, model) FROM stdin;
+1	log entry	admin	logentry
+2	permission	auth	permission
+3	group	auth	group
+4	user	auth	user
+5	content type	contenttypes	contenttype
+6	session	sessions	session
+7	marks	p2app	marks
+9	userprofile	p2app	userprofile
+10	stu	p3app	stu
+11	classstudying	p4app	classstudying
+12	student	p4app	student
+13	userprofile	p4app	userprofile
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 13, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+6x7gp7eytuccnulxrmogbsriho9fclui	YzU1ODQ2Y2JkODZhZWQ1MjVhOWUwYWM4N2RmNWJiMmY0Y2MzNDM2Zjp7InRlc3Rjb29raWUiOiJ3b3JrZWQifQ==	2014-07-22 16:15:16.403001+05:30
+baey0g65srvmyo55aqufww2fg5f68i6y	ZDU0ZmUyNTJhYWM4NGJlZGE2YjVhOTc1ZGNkNDg3YmUyYTViZmZmYzp7Il9hdXRoX3VzZXJfaWQiOjIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-17 15:39:27.13652+05:30
+3pjaqsqpb8xq1qrq2bsem6ptln920ijo	YzU1ODQ2Y2JkODZhZWQ1MjVhOWUwYWM4N2RmNWJiMmY0Y2MzNDM2Zjp7InRlc3Rjb29raWUiOiJ3b3JrZWQifQ==	2014-07-17 15:40:40.317943+05:30
+tt2zceif9cszyo0ap5l2n28yfdet7w8k	YjlmYTE0MDM2ZjdlNzk4MjNiOTVhNWIyM2YzYWI4ZmIyYzY3M2RlZDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0=	2014-07-17 15:44:56.970977+05:30
+rc6e5ekg7qt852d91rx3siot3vdjyeez	YjlmYTE0MDM2ZjdlNzk4MjNiOTVhNWIyM2YzYWI4ZmIyYzY3M2RlZDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0=	2014-07-17 15:45:17.637207+05:30
+z71qgcbqqw6q674xwd6k8mhta1hcw6k3	NjllMWQ4NGU0NTlhNDhkMzczYTAxOGMxZDllZDgxZmQ0YzEzOWViYTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-18 11:24:41.294384+05:30
+xp53ztdswmi5o26e137f8ry9ixy6sy7r	YzU1ODQ2Y2JkODZhZWQ1MjVhOWUwYWM4N2RmNWJiMmY0Y2MzNDM2Zjp7InRlc3Rjb29raWUiOiJ3b3JrZWQifQ==	2014-07-22 16:48:59.791624+05:30
+oo9aoe0cup4ckl7xucike3ubhyrc6mfo	MzQzNmM4YzFkYzJlYmZjODk2NWFjMWU0ZmQ4ZDA5NzYxMzUzZDZkMTp7InRlc3Rjb29raWUiOiJ3b3JrZWQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjIsIm5hbWUiOiJyYXZpMTIzIn0=	2014-07-18 10:04:06.321935+05:30
+67fvce0tyv61gbdrbtxnvashkceb4we4	ZDU0ZmUyNTJhYWM4NGJlZGE2YjVhOTc1ZGNkNDg3YmUyYTViZmZmYzp7Il9hdXRoX3VzZXJfaWQiOjIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-18 10:09:38.299435+05:30
+o7r9pn06215qyd6v0a9lw6xz3wrsu1cx	ZDU0ZmUyNTJhYWM4NGJlZGE2YjVhOTc1ZGNkNDg3YmUyYTViZmZmYzp7Il9hdXRoX3VzZXJfaWQiOjIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-18 10:14:09.094247+05:30
+fzwbjp17490hcwjx6yxwj3524m4xyg1l	ZDU0ZmUyNTJhYWM4NGJlZGE2YjVhOTc1ZGNkNDg3YmUyYTViZmZmYzp7Il9hdXRoX3VzZXJfaWQiOjIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-18 10:18:59.794825+05:30
+3bjiroibxno7vmg0vi7sxbkc67nt0rpl	ZDU0ZmUyNTJhYWM4NGJlZGE2YjVhOTc1ZGNkNDg3YmUyYTViZmZmYzp7Il9hdXRoX3VzZXJfaWQiOjIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-18 10:32:44.967275+05:30
+qe2irrimtudann8s3hiiyp4yztfgtqc4	ZDU0ZmUyNTJhYWM4NGJlZGE2YjVhOTc1ZGNkNDg3YmUyYTViZmZmYzp7Il9hdXRoX3VzZXJfaWQiOjIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-18 10:34:38.452958+05:30
+qp4ld7oknizp4agt92h88rfx2cmipifl	NjllMWQ4NGU0NTlhNDhkMzczYTAxOGMxZDllZDgxZmQ0YzEzOWViYTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-18 12:02:08.446879+05:30
+auhxliapvtystf93y7r45lzaaj6qt648	Y2E1ZjcyYTFlM2M1YmM0ZWE0ZDQ5YzBmODhiNDQzZTExZDE3ZmY3MTp7Il9hdXRoX3VzZXJfaWQiOjIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2014-07-31 11:13:17.946204+05:30
+jpurh85xp19kyjng2finzj56a5cwfmwj	ZDU0ZmUyNTJhYWM4NGJlZGE2YjVhOTc1ZGNkNDg3YmUyYTViZmZmYzp7Il9hdXRoX3VzZXJfaWQiOjIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-18 12:49:05.127646+05:30
+saqxqx83i4s6bmq3u7lhsoomssxfwy0h	ZDU0ZmUyNTJhYWM4NGJlZGE2YjVhOTc1ZGNkNDg3YmUyYTViZmZmYzp7Il9hdXRoX3VzZXJfaWQiOjIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-17 15:38:30.783268+05:30
+x18e2ocurrj1ikl4u76yq22a2hgv53eq	NjllMWQ4NGU0NTlhNDhkMzczYTAxOGMxZDllZDgxZmQ0YzEzOWViYTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-18 15:14:31.328484+05:30
+kqoz2anbr0ii0ncz09aokc7awlrhc8cc	NjllMWQ4NGU0NTlhNDhkMzczYTAxOGMxZDllZDgxZmQ0YzEzOWViYTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MiwibmFtZSI6InJhdmkxMjMifQ==	2014-07-18 15:42:42.008239+05:30
+c5ku3b79iqkslq8svpepodh4be6fc55n	MDI4NGRjZDUxMWVkMTdkMjNkODljZWMyYmQzOTk5YmYwZjIwOGNkMjp7Il9hdXRoX3VzZXJfaWQiOjIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwibmFtZSI6InJhdmkxMjMifQ==	2014-08-20 11:50:54.560183+05:30
+\.
+
+
+--
+-- Data for Name: p2app_marks; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY p2app_marks (id, s_name, f_a1, f_a2, f_a3, f_a4, f_b1, f_b2, f_b3, f_b4, s_a, e_i, d_t, f_l, t_m, e_m, f_a, f_b, f_aa, t_o) FROM stdin;
+1	Arun	1	2	3	4	5	6	7	8	50	a@a.com	2014-01-06	upload/01_Maa_Tujhe_Salaam_11.mp3	t	f	7	15	22	72
+2	Babu	8	7	9	7	8	9	7	8	58	babu@gmail.com	2014-05-06	upload/01_Maa_Tujhe_Salaam_12.mp3	t	f	17	17	34	92
+3	Chandran	8	5	8	5	8	5	8	5	60	chandran@gmail.com	2014-01-06	upload/01_Maa_Tujhe_Salaam_13.mp3	t	f	16	16	32	92
+4	David	5	6	5	6	5	6	5	6	40	david@gmail.com	2014-01-06	upload/04_Tauba_Tauba_3.mp3	f	t	12	12	24	64
+\.
+
+
+--
+-- Data for Name: p2app_marks1; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY p2app_marks1 (id, s_name, f_a1, f_a2) FROM stdin;
+1	ravi	8	8
+\.
+
+
+--
+-- Name: p2app_marks1_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('p2app_marks1_id_seq', 1, true);
+
+
+--
+-- Name: p2app_marks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('p2app_marks_id_seq', 4, true);
+
+
+--
+-- Data for Name: p2app_userprofile; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY p2app_userprofile (id, user_id, company, website) FROM stdin;
+1	1	test	https://www.google.co.in/?gfe_rd=cr&ei=SADFU9buIpKCvAT3j4LoBA&gws_rd=ssl
+2	3	google	https://www.google.co.in/?gfe_rd=cr&ei=Wx3GU52hBZSEvAS96IHwDg&gws_rd=ssl
+\.
+
+
+--
+-- Name: p2app_userprofile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('p2app_userprofile_id_seq', 2, true);
+
+
+--
+-- Data for Name: p3app_stu; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY p3app_stu (id, sid, name, fathersname, school, district) FROM stdin;
+5	1	Ravi kumar	mani	corley	Kancheepuram
+6	2	sathish kumar	mani	corley	Kancheepuram
+\.
+
+
+--
+-- Name: p3app_stu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('p3app_stu_id_seq', 6, true);
+
+
+--
+-- Data for Name: p4app_classstudying; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY p4app_classstudying (id, standard) FROM stdin;
+1	1
+2	2
+3	3
+4	4
+5	5
+6	6
+7	7
+8	8
+9	9
+10	10
+\.
+
+
+--
+-- Name: p4app_classstudying_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('p4app_classstudying_id_seq', 10, true);
+
+
+--
+-- Data for Name: p4app_student; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY p4app_student (id, sid, name, father_name, school, std_id, tamil, english, maths, science, social, total) FROM stdin;
+12	1	Ravi	Kumar	Corley	6	50	50	50	50	50	250
+\.
+
+
+--
+-- Name: p4app_student_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('p4app_student_id_seq', 14, true);
+
+
+--
+-- Data for Name: p4app_userprofile; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY p4app_userprofile (id, user_id, school, district) FROM stdin;
+\.
+
+
+--
+-- Name: p4app_userprofile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ravi
+--
+
+SELECT pg_catalog.setval('p4app_userprofile_id_seq', 1, false);
+
+
+--
+-- Data for Name: school; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY school (id, code, name, district, "timestamp") FROM stdin;
+1	330102	Govt High School	3301	2014-07-10 11:35:03.964022
+2	330103	SSR High School	3302	2014-07-10 11:40:22.852957
+3	330104	Cresent School	3302	2014-07-10 11:42:49.588371
+4	330105	Aloysius School	3302	2014-07-10 11:43:10.765955
+5	330106	Columbus School	3301	2014-07-10 11:43:47.576823
+6	330107	St.Joseph School	3301	2014-07-10 12:22:19.779055
+7	330108	Namakkal School	3310	2014-07-10 12:23:09.811981
+\.
+
+
+--
+-- Data for Name: station; Type: TABLE DATA; Schema: public; Owner: ravi
+--
+
+COPY station (id, s_name, city, n_trains, s_master, vg_pass) FROM stdin;
+1	CHENGALPATTU	CPT	200	RAVI                                              	12354.1504
+3	MMNAGAR	CPT	200	SATHISH                                           	12354.1504
+4	TAMBARAM	CHENNAI	200	KUMAR                                             	12354.1504
+2	BEACH	CHENNAI	300	RK                                                	24005.2109
+\.
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_key UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_key UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_key UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_key UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_model_key; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_key UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: myprimarykey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY district
+    ADD CONSTRAINT myprimarykey PRIMARY KEY (code);
+
+
+--
+-- Name: p2app_marks1_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY p2app_marks1
+    ADD CONSTRAINT p2app_marks1_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: p2app_marks_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY p2app_marks
+    ADD CONSTRAINT p2app_marks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: p2app_userprofile_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY p2app_userprofile
+    ADD CONSTRAINT p2app_userprofile_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: p2app_userprofile_user_id_key; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY p2app_userprofile
+    ADD CONSTRAINT p2app_userprofile_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: p3app_stu_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY p3app_stu
+    ADD CONSTRAINT p3app_stu_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: p4app_classstudying_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY p4app_classstudying
+    ADD CONSTRAINT p4app_classstudying_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: p4app_student_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY p4app_student
+    ADD CONSTRAINT p4app_student_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: p4app_userprofile_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY p4app_userprofile
+    ADD CONSTRAINT p4app_userprofile_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: p4app_userprofile_user_id_key; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY p4app_userprofile
+    ADD CONSTRAINT p4app_userprofile_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: school_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY school
+    ADD CONSTRAINT school_pkey PRIMARY KEY (code);
+
+
+--
+-- Name: station_pkey; Type: CONSTRAINT; Schema: public; Owner: ravi; Tablespace: 
+--
+
+ALTER TABLE ONLY station
+    ADD CONSTRAINT station_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_like; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX auth_group_name_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_group_id ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_permission_id ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX auth_permission_content_type_id ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_group_id ON auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_user_id ON auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_user_id ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_like; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX auth_user_username_like ON auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_content_type_id; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_content_type_id ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_user_id ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX django_session_expire_date ON django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_like; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX django_session_session_key_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: p4app_student_std_id; Type: INDEX; Schema: public; Owner: ravi; Tablespace: 
+--
+
+CREATE INDEX p4app_student_std_id ON p4app_student USING btree (std_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: content_type_id_refs_id_93d2d1f8; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT content_type_id_refs_id_93d2d1f8 FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: content_type_id_refs_id_d043b34a; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT content_type_id_refs_id_d043b34a FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: group_id_refs_id_f4b32aac; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT group_id_refs_id_f4b32aac FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: p2app_userprofile_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY p2app_userprofile
+    ADD CONSTRAINT p2app_userprofile_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: p4app_student_std_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY p4app_student
+    ADD CONSTRAINT p4app_student_std_id_fkey FOREIGN KEY (std_id) REFERENCES p4app_classstudying(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: p4app_userprofile_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY p4app_userprofile
+    ADD CONSTRAINT p4app_userprofile_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: school_district_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY school
+    ADD CONSTRAINT school_district_fkey FOREIGN KEY (district) REFERENCES district(code);
+
+
+--
+-- Name: user_id_refs_id_40c41112; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT user_id_refs_id_40c41112 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_4dc23c39; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT user_id_refs_id_4dc23c39 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_c0d12874; Type: FK CONSTRAINT; Schema: public; Owner: ravi
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT user_id_refs_id_c0d12874 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect emisf10
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- Name: emp_stamp(); Type: FUNCTION; Schema: public; Owner: emisf10
+--
+
+CREATE FUNCTION emp_stamp() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+ BEGIN
+        -- Check that empname and salary are given
+        IF NEW.empname IS NULL THEN
+                RAISE EXCEPTION 'empname cannot be null';
+        END IF;
+        IF NEW.salary IS NULL THEN
+                RAISE EXCEPTION '% cannot have null salary', NEW.empname;
+        END IF;
+
+        --Who works for us when she must pay for it?
+        
+        IF NEW.salary < 0 THEN
+                RAISE EXCEPTION '% cannot have negative salary', NEW.empname;
+        END IF;
+        
+        --Remember who changed the payroll when
+        NEW.last_date := current_timestamp;
+        NEW.last_user := current_user;
+        RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION public.emp_stamp() OWNER TO emisf10;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: foo; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE foo (
+    fooid integer,
+    foosubid integer,
+    fooname text
+);
+
+
+ALTER TABLE public.foo OWNER TO emisf10;
+
+--
+-- Name: getallfoo(); Type: FUNCTION; Schema: public; Owner: emisf10
+--
+
+CREATE FUNCTION getallfoo() RETURNS SETOF foo
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+	r foo%rowtype;
+BEGIN
+	FOR r IN SELECT * FROM foo
+	WHERE fooid > 0
+	LOOP
+		-- can do some processing here
+		RETURN NEXT r; --RETURN CURRENT ROW OF SELECT
+	END LOOP;	
+	RETURN;
+END
+$$;
+
+
+ALTER FUNCTION public.getallfoo() OWNER TO emisf10;
+
+--
+-- Name: r(); Type: FUNCTION; Schema: public; Owner: emisf10
+--
+
+CREATE FUNCTION r() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+	avg float;
+BEGIN
+	avg = (NEW.test1+NEW.test2+NEW.test3)/3.0;
+	IF avg > 80 THEN
+		insert into class1 values(NEW.id,NEW.name,NEW.test1,NEW.test2,NEW.test3,avg);
+	END IF;
+	
+	IF avg > 50 and avg <=80 THEN
+		insert into class2 values(NEW.id,NEW.name,NEW.test1,NEW.test2,NEW.test3,avg);
+	END IF;
+
+	IF avg < 50 THEN
+		insert into fail values(NEW.id,NEW.name,NEW.test1,NEW.test2,NEW.test3,avg);
+	END IF;
+	RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public.r() OWNER TO emisf10;
+
+--
+-- Name: rr(); Type: FUNCTION; Schema: public; Owner: emisf10
+--
+
+CREATE FUNCTION rr() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+	avg float;
+BEGIN
+	avg = (NEW.test1+NEW.test2+NEW.test3)/3.0;
+	IF avg > 80 THEN
+		insert into class1 values(NEW.id,NEW.name,NEW.test1,NEW.test2,NEW.test3,avg);
+	END IF;
+	
+	IF avg > 50 and avg <=80 THEN
+		insert into class2 values(NEW.id,NEW.name,NEW.test1,NEW.test2,NEW.test3,avg);
+	END IF;
+
+	IF avg > 50 and avg <=80 THEN
+		insert into fail values(NEW.id,NEW.name,NEW.test1,NEW.test2,NEW.test3,avg);
+	END IF;
+	RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public.rr() OWNER TO emisf10;
+
+--
+-- Name: snitch(); Type: FUNCTION; Schema: public; Owner: emisf10
+--
+
+CREATE FUNCTION snitch() RETURNS event_trigger
+    LANGUAGE plpgsql
+    AS $$
+begin 
+        raise notice 'snitch:% %', tg_event,tg_tag;
+end;
+$$;
+
+
+ALTER FUNCTION public.snitch() OWNER TO emisf10;
+
+--
+-- Name: advisor; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE advisor (
+    s_id character varying(5) NOT NULL,
+    i_id character varying(5)
+);
+
+
+ALTER TABLE public.advisor OWNER TO emisf10;
+
+--
+-- Name: cities; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE cities (
+    name text,
+    population double precision,
+    altitude integer
+);
+
+
+ALTER TABLE public.cities OWNER TO emisf10;
+
+--
+-- Name: capitals; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE capitals (
+    state character(2)
+)
+INHERITS (cities);
+
+
+ALTER TABLE public.capitals OWNER TO emisf10;
+
+--
+-- Name: marks; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE marks (
+    id integer,
+    name text,
+    test1 integer,
+    test2 integer,
+    test3 integer
+);
+
+
+ALTER TABLE public.marks OWNER TO emisf10;
+
+--
+-- Name: class1; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE class1 (
+    avg double precision
+)
+INHERITS (marks);
+
+
+ALTER TABLE public.class1 OWNER TO emisf10;
+
+--
+-- Name: class2; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE class2 (
+    avg double precision
+)
+INHERITS (marks);
+
+
+ALTER TABLE public.class2 OWNER TO emisf10;
+
+--
+-- Name: classroom; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE classroom (
+    building character varying(15) NOT NULL,
+    room_number character varying(7) NOT NULL,
+    capacity numeric(4,0)
+);
+
+
+ALTER TABLE public.classroom OWNER TO emisf10;
+
+--
+-- Name: course; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE course (
+    course_id character varying(8) NOT NULL,
+    title character varying(50),
+    dept_name character varying(20),
+    credits numeric(2,0),
+    CONSTRAINT course_credits_check CHECK ((credits > (0)::numeric))
+);
+
+
+ALTER TABLE public.course OWNER TO emisf10;
+
+--
+-- Name: d_count; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE d_count (
+    count bigint
+);
+
+
+ALTER TABLE public.d_count OWNER TO emisf10;
+
+--
+-- Name: dep_count; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE dep_count (
+    count bigint
+);
+
+
+ALTER TABLE public.dep_count OWNER TO emisf10;
+
+--
+-- Name: department; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE department (
+    dept_name character varying(20) NOT NULL,
+    building character varying(15),
+    budget numeric(12,2),
+    CONSTRAINT department_budget_check CHECK ((budget > (0)::numeric))
+);
+
+
+ALTER TABLE public.department OWNER TO emisf10;
+
+--
+-- Name: emp; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE emp (
+    empname text,
+    salary integer,
+    last_date timestamp without time zone,
+    last_user text
+);
+
+
+ALTER TABLE public.emp OWNER TO emisf10;
+
+--
+-- Name: fail; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE fail (
+    avg double precision
+)
+INHERITS (marks);
+
+
+ALTER TABLE public.fail OWNER TO emisf10;
+
+--
+-- Name: instructor; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE instructor (
+    id character varying(5) NOT NULL,
+    name character varying(20) NOT NULL,
+    dept_name character varying(20),
+    salary numeric(8,2),
+    CONSTRAINT instructor_salary_check CHECK ((salary > (29000)::numeric))
+);
+
+
+ALTER TABLE public.instructor OWNER TO emisf10;
+
+--
+-- Name: prereq; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE prereq (
+    course_id character varying(8) NOT NULL,
+    prereq_id character varying(8) NOT NULL
+);
+
+
+ALTER TABLE public.prereq OWNER TO emisf10;
+
+--
+-- Name: section; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE section (
+    course_id character varying(8) NOT NULL,
+    sec_id character varying(8) NOT NULL,
+    semester character varying(6) NOT NULL,
+    year numeric(4,0) NOT NULL,
+    building character varying(15),
+    room_number character varying(7),
+    time_slot_id character varying(4),
+    CONSTRAINT section_semester_check CHECK (((semester)::text = ANY ((ARRAY['Fall'::character varying, 'Winter'::character varying, 'Spring'::character varying, 'Summer'::character varying])::text[]))),
+    CONSTRAINT section_year_check CHECK (((year > (1701)::numeric) AND (year < (2100)::numeric)))
+);
+
+
+ALTER TABLE public.section OWNER TO emisf10;
+
+--
+-- Name: student; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE student (
+    id character varying(5) NOT NULL,
+    name character varying(20) NOT NULL,
+    dept_name character varying(20),
+    tot_cred numeric(3,0),
+    CONSTRAINT student_tot_cred_check CHECK ((tot_cred >= (0)::numeric))
+);
+
+
+ALTER TABLE public.student OWNER TO emisf10;
+
+--
+-- Name: takes; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE takes (
+    id character varying(5) NOT NULL,
+    course_id character varying(8) NOT NULL,
+    sec_id character varying(8) NOT NULL,
+    semester character varying(6) NOT NULL,
+    year numeric(4,0) NOT NULL,
+    grade character varying(2)
+);
+
+
+ALTER TABLE public.takes OWNER TO emisf10;
+
+--
+-- Name: teaches; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE teaches (
+    id character varying(5) NOT NULL,
+    course_id character varying(8) NOT NULL,
+    sec_id character varying(8) NOT NULL,
+    semester character varying(6) NOT NULL,
+    year numeric(4,0) NOT NULL
+);
+
+
+ALTER TABLE public.teaches OWNER TO emisf10;
+
+--
+-- Name: time_slot; Type: TABLE; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+CREATE TABLE time_slot (
+    time_slot_id character varying(4) NOT NULL,
+    day character varying(1) NOT NULL,
+    start_hr numeric(2,0) NOT NULL,
+    start_min numeric(2,0) NOT NULL,
+    end_hr numeric(2,0),
+    end_min numeric(2,0),
+    CONSTRAINT time_slot_end_hr_check CHECK (((end_hr >= (0)::numeric) AND (end_hr < (24)::numeric))),
+    CONSTRAINT time_slot_end_min_check CHECK (((end_min >= (0)::numeric) AND (end_min < (60)::numeric))),
+    CONSTRAINT time_slot_start_hr_check CHECK (((start_hr >= (0)::numeric) AND (start_hr < (24)::numeric))),
+    CONSTRAINT time_slot_start_min_check CHECK (((start_min >= (0)::numeric) AND (start_min < (60)::numeric)))
+);
+
+
+ALTER TABLE public.time_slot OWNER TO emisf10;
+
+--
+-- Data for Name: advisor; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY advisor (s_id, i_id) FROM stdin;
+00128	45565
+12345	10101
+23121	76543
+44553	22222
+45678	22222
+76543	45565
+76653	98345
+98765	98345
+98988	76766
+\.
+
+
+--
+-- Data for Name: capitals; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY capitals (name, population, altitude, state) FROM stdin;
+kanchipuram	2500000	45	TN
+\.
+
+
+--
+-- Data for Name: cities; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY cities (name, population, altitude) FROM stdin;
+kanchipuram	2500000	45
+madurai	2620000	50
+\.
+
+
+--
+-- Data for Name: class1; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY class1 (id, name, test1, test2, test3, avg) FROM stdin;
+\.
+
+
+--
+-- Data for Name: class2; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY class2 (id, name, test1, test2, test3, avg) FROM stdin;
+1	rr	80	80	80	80
+\.
+
+
+--
+-- Data for Name: classroom; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY classroom (building, room_number, capacity) FROM stdin;
+Packard	101	500
+Painter	514	10
+Taylor	3128	70
+Watson	100	30
+Watson	120	50
+Science	1	40
+Science	2	30
+\.
+
+
+--
+-- Data for Name: course; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY course (course_id, title, dept_name, credits) FROM stdin;
+BIO-101	Intro. to Biology	Biology	4
+BIO-301	Genetics	Biology	4
+BIO-399	Computational Biology	Biology	3
+CS-101	Intro. to Computer Science	Comp. Sci.	4
+CS-190	Game Design	Comp. Sci.	4
+CS-315	Robotics	Comp. Sci.	3
+CS-319	Image Processing	Comp. Sci.	3
+CS-347	Database System Concepts	Comp. Sci.	3
+EE-181	Intro. to Digital Systems	Elec. Eng.	3
+FIN-201	Investment Banking	Finance	3
+HIS-351	World History	History	3
+MU-199	Music Video Production	Music	3
+PHY-101	Physical Principles	Physics	4
+\.
+
+
+--
+-- Data for Name: d_count; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY d_count (count) FROM stdin;
+12
+\.
+
+
+--
+-- Data for Name: dep_count; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY dep_count (count) FROM stdin;
+3
+\.
+
+
+--
+-- Data for Name: department; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY department (dept_name, building, budget) FROM stdin;
+Biology	Watson	90000.00
+Comp. Sci.	Taylor	100000.00
+Elec. Eng.	Taylor	85000.00
+Finance	Painter	120000.00
+History	Painter	50000.00
+Music	Packard	80000.00
+Physics	Watson	70000.00
+\.
+
+
+--
+-- Data for Name: emp; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY emp (empname, salary, last_date, last_user) FROM stdin;
+Ravi	100000	2014-08-05 11:31:53.468008	emisf10
+\.
+
+
+--
+-- Data for Name: fail; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY fail (id, name, test1, test2, test3, avg) FROM stdin;
+\.
+
+
+--
+-- Data for Name: foo; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY foo (fooid, foosubid, fooname) FROM stdin;
+1	2	three
+4	5	six
+2	3	six
+\.
+
+
+--
+-- Data for Name: instructor; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY instructor (id, name, dept_name, salary) FROM stdin;
+12121	Wu	Finance	94500.00
+22222	Einstein	Physics	99750.00
+33456	Gold	Physics	91350.00
+45565	Katz	Comp. Sci.	78750.00
+76543	Singh	Finance	84000.00
+83821	Brandt	Comp. Sci.	96600.00
+98345	Kim	Elec. Eng.	84000.00
+10101	Srinivasan	Comp. Sci.	71662.50
+15151	Mozart	Music	44100.00
+32343	El Said	History	66150.00
+58583	Califieri	History	68355.00
+76766	Crick	Biology	79380.00
+\.
+
+
+--
+-- Data for Name: marks; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY marks (id, name, test1, test2, test3) FROM stdin;
+\.
+
+
+--
+-- Data for Name: prereq; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY prereq (course_id, prereq_id) FROM stdin;
+BIO-301	BIO-101
+BIO-399	BIO-101
+CS-190	CS-101
+CS-315	CS-101
+CS-319	CS-101
+CS-347	CS-101
+EE-181	PHY-101
+\.
+
+
+--
+-- Data for Name: section; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY section (course_id, sec_id, semester, year, building, room_number, time_slot_id) FROM stdin;
+BIO-101	1	Summer	2009	Painter	514	B
+BIO-301	1	Summer	2010	Painter	514	A
+CS-101	1	Fall	2009	Packard	101	H
+CS-101	1	Spring	2010	Packard	101	F
+CS-190	1	Spring	2009	Taylor	3128	E
+CS-190	2	Spring	2009	Taylor	3128	A
+CS-315	1	Spring	2010	Watson	120	D
+CS-319	1	Spring	2010	Watson	100	B
+CS-319	2	Spring	2010	Taylor	3128	C
+CS-347	1	Fall	2009	Taylor	3128	A
+EE-181	1	Spring	2009	Taylor	3128	C
+FIN-201	1	Spring	2010	Packard	101	B
+HIS-351	1	Spring	2010	Painter	514	C
+MU-199	1	Spring	2010	Packard	101	D
+PHY-101	1	Fall	2009	Watson	100	A
+\.
+
+
+--
+-- Data for Name: student; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY student (id, name, dept_name, tot_cred) FROM stdin;
+00128	Zhang	Comp. Sci.	102
+12345	Shankar	Comp. Sci.	32
+19991	Brandt	History	80
+23121	Chavez	Finance	110
+44553	Peltier	Physics	56
+45678	Levy	Physics	46
+54321	Williams	Comp. Sci.	54
+55739	Sanchez	Music	38
+70557	Snow	Physics	0
+76543	Brown	Comp. Sci.	58
+76653	Aoi	Elec. Eng.	60
+98765	Bourikas	Elec. Eng.	98
+98988	Tanaka	Biology	120
+\.
+
+
+--
+-- Data for Name: takes; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY takes (id, course_id, sec_id, semester, year, grade) FROM stdin;
+00128	CS-101	1	Fall	2009	A
+00128	CS-347	1	Fall	2009	A-
+12345	CS-101	1	Fall	2009	C
+12345	CS-190	2	Spring	2009	A
+12345	CS-315	1	Spring	2010	A
+12345	CS-347	1	Fall	2009	A
+19991	HIS-351	1	Spring	2010	B
+23121	FIN-201	1	Spring	2010	C+
+44553	PHY-101	1	Fall	2009	B-
+45678	CS-101	1	Fall	2009	F
+45678	CS-101	1	Spring	2010	B+
+45678	CS-319	1	Spring	2010	B
+54321	CS-101	1	Fall	2009	A-
+54321	CS-190	2	Spring	2009	B+
+55739	MU-199	1	Spring	2010	A-
+76543	CS-101	1	Fall	2009	A
+76543	CS-319	2	Spring	2010	A
+76653	EE-181	1	Spring	2009	C
+98765	CS-101	1	Fall	2009	C-
+98765	CS-315	1	Spring	2010	B
+98988	BIO-101	1	Summer	2009	A
+98988	BIO-301	1	Summer	2010	\N
+\.
+
+
+--
+-- Data for Name: teaches; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY teaches (id, course_id, sec_id, semester, year) FROM stdin;
+10101	CS-101	1	Fall	2009
+10101	CS-315	1	Spring	2010
+10101	CS-347	1	Fall	2009
+12121	FIN-201	1	Spring	2010
+15151	MU-199	1	Spring	2010
+22222	PHY-101	1	Fall	2009
+32343	HIS-351	1	Spring	2010
+45565	CS-101	1	Spring	2010
+45565	CS-319	1	Spring	2010
+76766	BIO-101	1	Summer	2009
+76766	BIO-301	1	Summer	2010
+83821	CS-190	1	Spring	2009
+83821	CS-190	2	Spring	2009
+83821	CS-319	2	Spring	2010
+98345	EE-181	1	Spring	2009
+\.
+
+
+--
+-- Data for Name: time_slot; Type: TABLE DATA; Schema: public; Owner: emisf10
+--
+
+COPY time_slot (time_slot_id, day, start_hr, start_min, end_hr, end_min) FROM stdin;
+A	M	8	0	8	50
+A	W	8	0	8	50
+A	F	8	0	8	50
+B	M	9	0	9	50
+B	W	9	0	9	50
+B	F	9	0	9	50
+C	M	11	0	11	50
+C	W	11	0	11	50
+C	F	11	0	11	50
+D	M	13	0	13	50
+D	W	13	0	13	50
+D	F	13	0	13	50
+E	T	10	30	11	45
+E	R	10	30	11	45
+F	T	14	30	15	45
+F	R	14	30	15	45
+G	M	16	0	16	50
+G	W	16	0	16	50
+G	F	16	0	16	50
+H	W	10	0	12	30
+\.
+
+
+--
+-- Name: advisor_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY advisor
+    ADD CONSTRAINT advisor_pkey PRIMARY KEY (s_id);
+
+
+--
+-- Name: classroom_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY classroom
+    ADD CONSTRAINT classroom_pkey PRIMARY KEY (building, room_number);
+
+
+--
+-- Name: course_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY course
+    ADD CONSTRAINT course_pkey PRIMARY KEY (course_id);
+
+
+--
+-- Name: department_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY department
+    ADD CONSTRAINT department_pkey PRIMARY KEY (dept_name);
+
+
+--
+-- Name: instructor_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY instructor
+    ADD CONSTRAINT instructor_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: prereq_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY prereq
+    ADD CONSTRAINT prereq_pkey PRIMARY KEY (course_id, prereq_id);
+
+
+--
+-- Name: section_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY section
+    ADD CONSTRAINT section_pkey PRIMARY KEY (course_id, sec_id, semester, year);
+
+
+--
+-- Name: student_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY student
+    ADD CONSTRAINT student_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: takes_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY takes
+    ADD CONSTRAINT takes_pkey PRIMARY KEY (id, course_id, sec_id, semester, year);
+
+
+--
+-- Name: teaches_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY teaches
+    ADD CONSTRAINT teaches_pkey PRIMARY KEY (id, course_id, sec_id, semester, year);
+
+
+--
+-- Name: time_slot_pkey; Type: CONSTRAINT; Schema: public; Owner: emisf10; Tablespace: 
+--
+
+ALTER TABLE ONLY time_slot
+    ADD CONSTRAINT time_slot_pkey PRIMARY KEY (time_slot_id, day, start_hr, start_min);
+
+
+--
+-- Name: emp_stamp; Type: TRIGGER; Schema: public; Owner: emisf10
+--
+
+CREATE TRIGGER emp_stamp BEFORE INSERT OR UPDATE ON emp FOR EACH ROW EXECUTE PROCEDURE emp_stamp();
+
+
+--
+-- Name: tr; Type: TRIGGER; Schema: public; Owner: emisf10
+--
+
+CREATE TRIGGER tr BEFORE INSERT OR UPDATE ON marks FOR EACH ROW EXECUTE PROCEDURE r();
+
+
+--
+-- Name: advisor_i_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY advisor
+    ADD CONSTRAINT advisor_i_id_fkey FOREIGN KEY (i_id) REFERENCES instructor(id) ON DELETE SET NULL;
+
+
+--
+-- Name: advisor_s_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY advisor
+    ADD CONSTRAINT advisor_s_id_fkey FOREIGN KEY (s_id) REFERENCES student(id) ON DELETE CASCADE;
+
+
+--
+-- Name: course_dept_name_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY course
+    ADD CONSTRAINT course_dept_name_fkey FOREIGN KEY (dept_name) REFERENCES department(dept_name) ON DELETE SET NULL;
+
+
+--
+-- Name: instructor_dept_name_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY instructor
+    ADD CONSTRAINT instructor_dept_name_fkey FOREIGN KEY (dept_name) REFERENCES department(dept_name) ON DELETE SET NULL;
+
+
+--
+-- Name: prereq_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY prereq
+    ADD CONSTRAINT prereq_course_id_fkey FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE;
+
+
+--
+-- Name: prereq_prereq_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY prereq
+    ADD CONSTRAINT prereq_prereq_id_fkey FOREIGN KEY (prereq_id) REFERENCES course(course_id);
+
+
+--
+-- Name: section_building_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY section
+    ADD CONSTRAINT section_building_fkey FOREIGN KEY (building, room_number) REFERENCES classroom(building, room_number) ON DELETE SET NULL;
+
+
+--
+-- Name: section_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY section
+    ADD CONSTRAINT section_course_id_fkey FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE;
+
+
+--
+-- Name: student_dept_name_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY student
+    ADD CONSTRAINT student_dept_name_fkey FOREIGN KEY (dept_name) REFERENCES department(dept_name) ON DELETE SET NULL;
+
+
+--
+-- Name: takes_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY takes
+    ADD CONSTRAINT takes_course_id_fkey FOREIGN KEY (course_id, sec_id, semester, year) REFERENCES section(course_id, sec_id, semester, year) ON DELETE CASCADE;
+
+
+--
+-- Name: takes_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY takes
+    ADD CONSTRAINT takes_id_fkey FOREIGN KEY (id) REFERENCES student(id) ON DELETE CASCADE;
+
+
+--
+-- Name: teaches_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY teaches
+    ADD CONSTRAINT teaches_course_id_fkey FOREIGN KEY (course_id, sec_id, semester, year) REFERENCES section(course_id, sec_id, semester, year) ON DELETE CASCADE;
+
+
+--
+-- Name: teaches_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: emisf10
+--
+
+ALTER TABLE ONLY teaches
+    ADD CONSTRAINT teaches_id_fkey FOREIGN KEY (id) REFERENCES instructor(id) ON DELETE CASCADE;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect postgres
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: postgres; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE postgres IS 'default administrative connection database';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect template1
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: template1; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE template1 IS 'default template for new databases';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database cluster dump complete
+--
+

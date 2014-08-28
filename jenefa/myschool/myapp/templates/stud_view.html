@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Student Details</title>
+</head>
+<body>
+<h2><center>Student Details</center></h2>
+<table border=2 align="center">
+<tr>
+<th>Stud_ID</th>
+<th>Name</th>
+<th>Sex</th>
+<th>Class</th>
+<th>School</th>
+</tr>
+<tr>
+
+{% for i in stud_list %}
+	<tr>
+	<td>{{i.sid}}</td>
+	<td>{{i.sname}}</td> 
+	<td>{{i.sex}}</td>
+	<td>{{i.std}}</td> 
+	<td>{{i.school}}</td> 
+	</tr>
+	{% endfor%}
+
+
+</table>
+
+</body>
+</html>

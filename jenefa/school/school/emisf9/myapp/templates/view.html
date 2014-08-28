@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <center><img src="/site_media/media/emis.png"></center>
+	<title></title> -->
+</head>
+<body bgcolor="pink">
+
+<h1><center>STUDENT DETAILS</h1></center>
+
+{{form.errors}}
+<table border="5" style="width:300px">
+<tr>
+		<th>STUD_ID</th>
+		<th>Name</th>
+  		<th>CLASS</th>
+   		<th>SEX</th>
+    	<th>DOB</th>
+     	<th>MEDIUM</th>
+        <th>MOTHER TONGUE</th>
+      	<th>COMMUNITY</th>
+      	<th>RELIGION</th>
+      	<th>DISTRICT</th>
+  		<th>PHONE_NO</th>
+  		<th>ADDRESS</th>
+  		<th>PINCODE</th>   		
+</tr>
+  
+ {% if pk %} 
+ 	<td>{{slist.Stdid}}</td> 
+	<td>{{slist.Name}}</td> 
+	<td>{{slist.Std}}</td> 
+	<td>{{slist.Sex}}</td> 
+	<td>{{slist.Dob}}</td> 
+	<td>{{slist.Medium}}</td>
+	<td>{{slist.Mother_tongue}}</td> 
+	<td>{{slist.Community}}</td> 
+	<td>{{slist.Religion}}</td> 
+	<td>{{slist.District}}</td> 
+	<td>{{slist.Phone_no}}</td> 
+	<td>{{slist.Address}}</td> 
+	<td>{{slist.Pincode}}</td> 		
+	
+{% else %}
+	{% for i in slist %}
+	<tr>
+	<td>{{i.Stdid}}</td>
+	<td>{{i.Name}}</td> 
+	<td>{{i.Std}}</td>
+	<td>{{i.Sex}}</td> 
+	<td>{{i.Dob}}</td> 
+	<td>{{i.Medium}}</td> 
+	<td>{{i.Mother_tongue}}</td> 
+	<td>{{i.Community}}</td> 
+	<td>{{i.Religion}}</td> 
+	<td>{{i.District}}</td> 
+	<td>{{i.Phone_no}}</td> 
+	<td>{{i.Address}}</td> 
+	<td>{{i.Pincode}}</td> 
+</tr>
+	{% endfor %}
+	{% endif %}
+ </table>
+
+<br>
+<br>
+<a href="emismain.html"><input type="button" style="background-color:pink"value="GO TO HOME PAGE">
+
+</body>
+</html>
+
+
+
+
+	

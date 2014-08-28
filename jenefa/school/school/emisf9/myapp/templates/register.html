@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<title></title>
+<head>
+<CENTER>ENTER NEW USER</CENTER>
+</head>
+<body bgcolor="FFDBFB"><br><br><br><br>
+<center>
+<form action="" method = POST> {% csrf_token %}
+{{a.as_p}}
+{{b.as_p}}
+<input type = "submit" value = 'Create User'/>
+
+</form>
+</body>
+</html>

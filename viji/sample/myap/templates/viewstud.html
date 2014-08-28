@@ -1,0 +1,41 @@
+{% extends 'emismain.html' %}
+{% block content %} 
+{{username}}
+<h3>Student Details : </h3>
+<body style="background-color:#FFCCFF;">
+<table border="1" style="width:100%">
+<tr>
+
+<th>ID</th>
+<th>NAME</th>
+<th>FATHER'S NAME</th>
+<th>AGE</th>
+<th>SEX</th>
+<th>LANGUAGE</th>
+<th>PHYSICS</th>
+<th>CHEMISTRY</th>
+<th>MATHS</th>
+<th>TOTAL</th>
+</tr>
+
+{% for i in b %}
+<tr>
+<td><b>{{i.studid}} </b> </td>
+<td><b>{{i.name}} </b> </td>
+<td><b>{{i.fname}} </b> </td>
+<td><b>{{i.age}} </b> </td>
+<td><b>{{i.std}} </b> </td>
+<td><b>{{i.lang}} </b> </td>
+<td><b>{{i.phys}} </b> </td>
+<td><b>{{i.chem}} </b> </td>
+<td><b>{{i.math}} </b> </td>
+<td><b>{{i.total}} </b> </td>
+</tr>
+
+{% endfor %}
+</table></body>
+<a href="/">go to home</a>
+ {% endblock %} 
+           
+    
+       

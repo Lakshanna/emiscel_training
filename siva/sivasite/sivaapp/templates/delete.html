@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Studend Delete Page{% endblock %}
+
+
+{% block main %}
+<body>
+<h1>Delete the Student details</h1>
+
+<form  action =' ' method="POST">{% csrf_token %}
+ <label >Name   :{{ a.first_name }} {{a.last_name}}</label> <br><br>
+
+
+<input class="menuitem" type="submit" name=" delete" value="Are you sure want to delete" onclick="alert('your data is deleted')" /><br>
+
+</form>
+</body>
+<a href="/">go to home</a>
+{% endblock %}
+

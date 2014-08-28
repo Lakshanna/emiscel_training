@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<form  action =' ' method="POST">{% csrf_token %}
+TEACHER NAME       : <input type='text' name='name' value={{ a.name }}><br>
+AGE                : <input type='number' name='age' value={{ a.age }}><br>
+
+DATE OF JOIN       : <input type='date' name='doj' value={{ a.doj|date:"Y-m-d" }}><br>
+
+<input type="submit" name="save" value="save" onclick="alert('your data is updated')" />
+ 
+<a href="/">go to home</a>
+{% endblock %}

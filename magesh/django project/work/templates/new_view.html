@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>student details : </h1>
+<table border="1" style="width:300px">
+
+<tr>
+<th>ROLL NO</th>
+<th>NAME</th>
+<th>STD</th>
+<th>MARKS</th>
+<th>SCHOOL</th>
+<th>BLOCK</th>
+<th>DISTRICT</th>
+<th>EDIT</th>
+<th>DELETE</th>
+
+</tr>
+
+{% for i in b %}
+<tr>
+
+<td><b>{{i.roll_no}} </b> </td>
+<td><b>{{i.name}} </b> </td>
+<td><b>{{i.std}} </b> </td>
+<td><b>{{i.marks}} </b> </td>
+<td><b>{{i.school}} </b> </td>
+<td><b>{{i.block}} </b> </td>
+<td><b>{{i.district}} </b> </td>
+
+<td><a href="/edit/{{i.id}}">edit</a></td>
+<td><a href="/delete/{{i.id}}">delete</a></td>
+</tr>
+
+{% endfor %}
+</table>
+
+<a href="/">go to home</a>
+{% endblock %}

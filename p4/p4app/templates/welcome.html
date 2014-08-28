@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Marks</title>
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" style="background-color:#808080;">
+<h1 style="margin-bottom:0;"><center> Welcome to Marks Register</center></h1><br> 
+Hello <b>{{name}}</b>, welcome !! <br>
+<div id = "subdiv" style = "background-color:blue;">
+<!-- <center>
+<input type='submit' value = 'newentry' name = 'new_entry'>
+<input type='submit' value = 'view' name = 'view'>
+ -->
+</div>
+</div>
+
+
+<div id="menu" style="background-color:yellow;height:550px;width:100px;float:right;">
+<center>
+<a href='{% url "myentry" %}'>NEW ENTRY</a><br><br><br>
+<a href='/view'>VIEW</a>
+</center>
+</div>
+
+<!-- content -->
+<div id="content" style="background-color:white;height:200px;width:400px;float:left;">
+<p align="justify">
+{% block content %}
+{% endblock %}
+</p>
+</div>
+
+
+<!-- Footer -->
+
+<div id="footer" style="background-color:#808080;clear:both;text-align:center;">
+<form action ='/logout/' method='POST'>{% csrf_token %}
+
+<input type='submit' value = 'logout' name ='logout'/></center></div>
+
+</form>
+</body>
+</html>

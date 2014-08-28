@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="titlebar" style="background-color:#66ffff;">
+<h1 align = "center" style="margin-bottom:0;">EMIS</h1>
+</div>
+<div id="logstatbar" align = 'right' style="background-color:#66ffff;">WELCOME {{username}}{{uname}}
+</div>
+
+<div id = "menu">
+<style>
+ul {
+height: auto;
+   list-style-type: none;
+   margin: 0px;
+   padding: 8px 0px;
+}
+ul{
+   width: 100%;
+   height: 20px;
+   font-size: 16px;
+   font-family: Tahoma, Arial, sans-serif;
+   font-weight: bold;
+   text-align: center;
+   text-shadow: 3px 2px 3px #333333;
+   background-color: #99ffff;
+   border-radius: 8px;
+}
+li{
+display: inline;
+width: 30%;
+padding: 50px;
+}
+a{
+text-decoration:none;
+   color:#000000;
+   text-shadow:8px 8px 8px #FFCC99;
+}
+a:hover {
+color:#fffff;
+   text-shadow:1px 1px 10px #CCC;
+}
+</style>
+
+<ul>
+<li><a href='/myapp/entry'>Entry</a></li>
+<!-- <li><a href='/myapp/view'>View</a></li>   -->
+<li><a href='/edit'>Edit</a></li>
+<li><a href='/delete'>Delete</a></li>
+<li><a href=''>LOGOUT USER</a></li>
+</ul>
+</div>
+{% block content %}
+<div id="content" style="background-color:#b2ffff;">
+information about us</div>
+{% endblock %}
+</body>
+</html>

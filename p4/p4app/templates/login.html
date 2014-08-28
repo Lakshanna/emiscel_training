@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>log in</title>
+</head>
+<body bgcolor= '#808080'>
+<form action ='/log/' method=POST enctype="multipart/form-data">{% csrf_token %}
+<center><h1>Login to Mark Register</h1>
+Username: <input type='text' name= 'username' /><br>
+Password:<input type='password' name= 'password' /><br>
+<input type='submit' value = 'Login' name ='mlogin'/></center>
+</form>
+</body>
+</html>

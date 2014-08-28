@@ -1,0 +1,40 @@
+sudo apt-get install rar
+sudo apt-get install vim
+sudo apt-get install aptitude
+
+sudo apt-get install git-core
+sudo apt-get install python-pip
+sudo pip install virtualenv
+
+Download and install chrome.deb
+
+sudo apt-get install postgresql-client 
+sudo apt-get install postgresql postgresql-contrib
+sudo apt-get install pgadmin3
+sudo apt-get install postgresql-contrib
+sudo apt-get install postgresql-server-dev-9.2
+---------------------------------------------------------------------
+Download Sublime text 3
+
+wget http://c758482.r82.cf2.rackcdn.com/sublime_text_3_build_3059_x32.tar.bz2
+
+Extract the sublime_text_3_build_3059_x32.tar.bz2
+
+tar vxjf "sublime_text_3_build_3059_x32.tar.bz2"
+
+sudo mv Sublime_text_3 /opt/
+
+cd /opt/sublime_text_3
+
+vi subl3
+#!/bin/sh 
+exec /opt/sublime_text_3/sublime_text "$@"
+
+sudo chmod 755 subl3
+
+sudo mv subl3 /usr/bin/ 
+--------------------------------------------------------------
+
+
+
+

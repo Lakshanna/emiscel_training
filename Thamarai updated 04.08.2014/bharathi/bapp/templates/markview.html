@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+<center><img src="/site_media/media/emis.png"></center>
+	<title></title>
+</head>
+<body bgcolor="#B1FB17">
+
+<h1><center>student details</h1></center>
+
+<table border="1" style="width:300px">
+<tr>
+<th>UID</th>
+  <th>NAME</th>
+   <th>FNAME</th>
+    <th>SCHOOL</th>
+     <th>CLASS</th>
+      <th>T</th>
+      <th>E</th>
+      <th>M</th>
+      <th>P</th>
+      <th>C</th>
+      <th>B</th>
+      <th>TOTAL</th>
+      <th>EDIT</th>
+  <th>DELETE</th>
+  </tr>
+  
+ {% if pk %}
+ 
+<td>{{bs.uid}}</td> <br>
+	<td>{{bs.name}}</td> <br>
+	<td>{{bs.fname}}</td> <br>
+	<td>{{bs.school}}</td> <br>
+	<td>{{bs.std}}</td> <br>
+	<td>{{bs.tam}}</td> <br>
+	<td>{{bs.eng}}</td> <br>
+	<td>{{bs.mat}}</td> <br>
+	<td>{{bs.phy}}</td> <br>
+	<td>{{bs.chem}}</td> <br>
+	<td>{{bs.bio}}</td> <br>
+	<td>{{bs.tot}}</td> <br>
+	
+	
+{% else %}
+	{% for i in bs %}
+	<tr>
+	<td>{{i.uid}}</td> <br>
+	<td>{{i.name}}</td> <br>
+	<td>{{i.fname}}</td> <br>
+	<td>{{i.school}}</td> <br>
+	<td>{{i.std}}</td> <br>
+	<td>{{i.tam}}</td> <br>
+	<td>{{i.eng}}</td> <br>
+	<td>{{i.mat}}</td> <br>
+	<td>{{i.phy}}</td> <br>
+	<td>{{i.chem}}</td> <br>
+	<td>{{i.bio}}</td> <br>
+	<td>{{i.tot}}</td> <br>
+
+<td><a href='{% url "edit" pk=i.uid %}'>Edit</a></td>
+<td><a href='{% url "delete" pk=i.uid %}'>Delete</a></td>
+</tr>
+	{% endfor %}
+	{% endif %}
+	
+ </table>
+
+
+<br>
+<br>
+<a href="/home"><input type="button" style="background-color:red"value="GO TO HOME PAGE">
+
+<a href="{% url 'entry' %}">GO TO Student Entry</a><br>
+
+</body>
+</html>

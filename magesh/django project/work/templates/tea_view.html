@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>student details : </h1>
+<table border="1" style="width:300px">
+<tr>
+<th>ID</th>
+<th>NAME</th>
+<th>AGE</th>
+<th>DATE OF JOINING</th>
+<th>EDIT</th>
+<th>DELETE</th>
+</tr>
+
+{% for i in b %}
+<tr>
+<td><b>{{i.id}} </b> </td>
+<td><b>{{i.name}} </b> </td>
+<td><b>{{i.age}} </b> </td>
+<td><b>{{i.doj}} </b> </td>
+<td><a href="/tea_edit/{{i.id}}">edit</a></td>
+<td><a href="/tea_delete/{{i.id}}">delete</a></td>
+</tr>
+
+{% endfor %}
+</table>
+
+<a href="/">go to home</a>
+{% endblock %}
