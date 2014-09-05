@@ -1,48 +1,97 @@
 <!DOCTYPE html>
 <html>
-<body style=" ">
+<title>Login </title>
+<head>
+<script>
+
+function validate()
+{
+  var dValidate=document.frm.txtpwd.value;
+  if(dValidate=="")
+  {
+    alert("Number Field is empty")
+    return false;
+  }
+  else if(isDigits(dValidate)==false)
+  {
+   alert("Field is not numeric")
+   return false;
+  }
+}
+
+
+function isDigits(argvalue) {
+    argvalue = argvalue.toString();
+    var validChars = "0123456789";
+    var startFrom = 0;
+    if (argvalue.substring(0, 2) == "0x") {
+       validChars = "0123456789abcdefABCDEF";
+       startFrom = 2;
+    } else if (argvalue.charAt(0) == "0") {
+       validChars = "01234567";
+       startFrom = 1;
+    }
+    for (var n = 0; n < argvalue.length; n++) {
+        if (validChars.indexOf(argvalue.substring(n, n+1)) == -1) return false;
+    }
+  return true;
+}
+</script>
+	<style>
+h1 {color:#800000;}
+h2 {color:MidnightBlue;}
+fieldset {
+  font-size:20px;
+  padding:10px;
+  width:450px;
+  line-height:1.8;} 
+
+</style>
+
+<body style="background-color:#D6C2AD">
 
 
 <div id="container" style="width:100%">
 <div id="stats">
-<!-- STATS: Total: %(totTime).2f Python: %(pyTime).2f DB: %(dbTime).2f Queries: %(queries)d -->
-
 </div>
 
-<div id="header" style="background-color:#CEAE2E;"> 
+<center><div id="header" style=" align:center; background-color:#BFAA94; width:500px;" text-align="center"> 
+
+<h1>SCHOOL SANITARY DETAILS 
+</h1></div>
+</center>
+<!-- <div id="header" style="background-color:#FF99CC;width:900px;padding:25px;" align="center"> 
 <CENTER>
-<h1 style='Filter: glow()'><font color=blue>SCHOOLS SANITARY DETAILS 
-</font></h1></div>
-<div id="statusbar" style="background-color:#F518EA;height:20px;width:1300px;float:top;">
-{% block userdetails %}<b>
-<a href="/">Logout</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<b><a><input type="button" value="Go Back" onclick="history.back(-1)"></a></b>
-{% endblock %}
-</div>
-
-
+<h1 style='Filter: glow()'>SCHOOL SANITARY DETAILS 
+</font></h1></div> -->
 {% block content %}
-<div id="content" style="background-color:white;height:1000px;width:400px;float:center;">
-<b>
-<fieldset>
-  <legend>Login : </legend>
-<form action='' method="POST">
+<div id="content" align="center">
+<br>
+
+ 
+<!-- <fieldset> -->
+<div id="table" style="background-color:#C0C0C0;width:300px;padding:25px;border:8px chocolate;margin:5px" align="center"
+<legend><h2>Login</h2> </legend>
+<form action='' method="POST" name="frm" onSubmit="return validate();">
 {% csrf_token %}
 <table><tr>
-<td>User Name</td><td>:</td><td><input type="text" name="txtuname"></td></tr>
-<tr><td>Password</td><td>:</td><td><input type="password" name="txtpwd"></td></tr>
+<td>User Name</td><td>:</td><td><input type="text" name="txtuname" title='Only Enter Block Name'></td></tr>
+<tr><td>Password</td><td>:</td><td><input type="password" name="txtpwd" title='Only Enter 6 Digit Block Codes'></td></tr>
 <tr><td colspan="3" align="center"><input type="submit" value="Login"></td></tr></table>
 </form>
-</fieldset></b>
+<!-- </fieldset></b> -->
 </div>
+
 {% endblock %}
-
-
-<div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
-Copyright © EMIS CELL</div>
-
 </div>
+
+
+
+
+</br>
+</br>
+<div id="footer" style="background-color:#C2AD99;clear:both;text-align:center; height:">
+Copyright © EMIS CELL</div>
 
 </body>
 </html> 

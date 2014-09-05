@@ -5,13 +5,13 @@
 <center>
 
 <form  action ='showdetails' method="POST">{% csrf_token %}
-District:
-<input type='text' name='districtname1' value={% for i in schoolrec %}
+<!-- District: -->
+<!-- <input type='text' name='districtname1' value= {% for i in schoolrec %}
 
-{{ i.Districtname }}
-{{ break }}
-{% endfor %} disabled="True">
-
+ {{ i.Districtname }}
+ 
+ {% endfor %} disabled="True" size=500>
+ -->
 <input  type ='hidden' name='districtname' value='{{ dschoolrec }}'>
 Block:<input type='text' name='blockname' value= {{ blockrec.Block_Name }} >
 UDISE Code :

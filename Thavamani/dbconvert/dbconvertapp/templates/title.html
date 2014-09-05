@@ -1,18 +1,57 @@
 {% extends 'base.html' %}
 {% block content %}
+<html>
+<head>
+<script>
+
+function validate()
+{
+  var dValidate=document.frm.txtpwd.value;
+  if(dValidate=="")
+  {
+    alert("Password is empty")
+    return false;
+  }
+  else if(isDigits(dValidate)==false)
+  {
+   alert("Password is not numeric")
+   return false;
+  }
+}
+
+
+function isDigits(argvalue) {
+    argvalue = argvalue.toString();
+    var validChars = "0123456789";
+    var startFrom = 0;
+    if (argvalue.substring(0, 2) == "0x") {
+       validChars = "0123456789abcdefABCDEF";
+       startFrom = 2;
+    } else if (argvalue.charAt(0) == "0") {
+       validChars = "01234567";
+       startFrom = 1;
+    }
+    for (var n = 0; n < argvalue.length; n++) {
+        if (validChars.indexOf(argvalue.substring(n, n+1)) == -1) return false;
+    }
+  return true;
+}
+</script>
+</head>
+<body>
 <table align="=center" width=100% >
 <tr>
 <td>
 <table bgcolor="543434" border="1" align="center" cellspacing="5" cellpadding="5">
-<form action='' method="POST">
+<form action='' method="POST" name='frm' onSubmit="return validate();">
 {% csrf_token %}
 
 <tr><td colspan="3" align="center"><h4><u>USER LOGIN</u></h4></td></tr>
 <tr>
 
 <td>User Name</td><td>:</td><td><input type="text" name="txtuname"></td></tr>
-<tr><td>Password</td><td>:</td><td><input type="password" name="txtpwd"></td></tr>
-<tr><td colspan="3" align="center"><input type="submit" value="Login"></td></tr>
+<tr><td>Password</td><td>:</td><td><input type="password" name="txtpwd" size="6" maxlength="6"></td></tr>
+<tr><td colspan="3" align="center"><input type="submit" value="Login" ></td></tr>
 </form>
 
 </table>

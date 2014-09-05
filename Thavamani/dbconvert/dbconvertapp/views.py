@@ -14,9 +14,14 @@ class home1(View):
             username = request.POST['txtuname']
             request.session['blockname']=username
             password = request.POST['txtpwd']
-            blockrec=Blocktable.objects.get(Block_Name=username)
-            schoolrec=Schoollist.objects.filter(Blockname=username)
-            dschoolrec=Schoollist.objects.filter(Blockname=username).distinct('Districtname')
+            blockrec=Blocktable.objects.get(Block_Name=username)#, Block=password)
+            print blockrec.Block
+            print password
+            if int(blockrec.Block)==int(password):
+                schoolrec=Schoollist.objects.filter(Blockname=username)
+                dschoolrec=Schoollist.objects.filter(Blockname=username).distinct('Districtname')
+            else:
+                return HttpResponseRedirect('/')                
 
         return render(request, 'edittable.html', locals())
 
@@ -39,9 +44,9 @@ class calc1(View):
         udisecode=request.session['udisecode']
         district=request.session['district']
         b=Schoollist.objects.get(UDISEcode=udisecode)
-        b.Districtname=request.session['district']
-        b.Blockname=request.session['blockname']
-        b.UDISEcode=udisecode
+        b.Districtname=request.POST['schoolname2']#request.session['district']
+        b.Blockname=request.POST['blockname2']#request.session['blockname']
+        b.UDISEcode=request.POST['schoolname1']#udisecode
         b.Schoolname=request.POST['schoolname']
         b.Management=request.POST['mgntname']
         b.Category=request.POST['cater']

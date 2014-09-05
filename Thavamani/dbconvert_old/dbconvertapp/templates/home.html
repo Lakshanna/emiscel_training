@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<title>Login </title>
+<head>
+	<style>
+h1 {color:#800000;}
+h2 {color:MidnightBlue;}
+fieldset {
+  font-size:20px;
+  padding:10px;
+  width:450px;
+  line-height:1.8;} 
+
+</style>
+
+<body style="background-color:#D6C2AD">
+
+
+<div id="container" style="width:100%">
+<div id="stats">
+</div>
+
+<center><div id="header" style=" align:center; background-color:#BFAA94; width:500px;" text-align="center"> 
+
+<h1>SCHOOL SANITARY DETAILS 
+</h1></div>
+</center>
+<!-- <div id="header" style="background-color:#FF99CC;width:900px;padding:25px;" align="center"> 
+<CENTER>
+<h1 style='Filter: glow()'>SCHOOL SANITARY DETAILS 
+</font></h1></div> -->
+{% block content %}
+<div id="content" align="center">
+<br>
+
+ 
+<!-- <fieldset> -->
+<div id="table" style="background-color:#C0C0C0;width:300px;padding:25px;border:8px chocolate;margin:5px" align="center"
+<legend><h2>Login</h2> </legend>
+<form action='' method="POST">
+{% csrf_token %}
+<table><tr>
+<td>User Name</td><td>:</td><td><input type="text" name="txtuname"></td></tr>
+<tr><td>Password</td><td>:</td><td><input type="password" name="txtpwd"></td></tr>
+<tr><td colspan="3" align="center"><input type="submit" value="Login"></td></tr></table>
+</form>
+<!-- </fieldset></b> -->
+</div>
+
+{% endblock %}
+</div>
+
+
+
+
+</br>
+</br>
+<div id="footer" style="background-color:#C2AD99;clear:both;text-align:center; height:">
+Copyright © EMIS CELL</div>
+
+</body>
+</html> 
+

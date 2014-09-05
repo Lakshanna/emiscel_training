@@ -24,9 +24,9 @@ class Schoollist(models.Model):
 		return self.Districtname
 
 class District(models.Model):
-	Districtname=models.CharField(max_length=50,primary_key=True)
+	Districtname=models.CharField(max_length=100,primary_key=True)
 class Block(models.Model):
- 	Blockname=models.CharField(max_length=50,primary_key=True)
+ 	Blockname=models.CharField(max_length=100,primary_key=True)
 # class Schoollist_new(models.Model):
 # 	Districtname=models.ForeignKey(District)
 # 	Blockname=models.ForeignKey(Block)

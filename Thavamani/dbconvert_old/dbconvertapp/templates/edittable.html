@@ -1,0 +1,29 @@
+{% extends 'home.html' %}
+{% block content %}
+<!-- <img src="site_media/media/{{a.photo}}" height="100" width="10" ></img>
+ -->
+<center>
+
+<form  action ='showdetails' method="POST">{% csrf_token %}
+<!-- District: -->
+<!-- <input type='text' name='districtname1' value= {% for i in schoolrec %}
+
+ {{ i.Districtname }}
+ 
+ {% endfor %} disabled="True" size=500>
+ -->
+<input  type ='text' name='districtname' value='{{ dschoolrec }}'>
+Block:<input type='text' name='blockname' value= {{ blockrec.Block_Name }} >
+UDISE Code :
+<select name='udisecode'>
+
+{% for i in schoolrec %}
+<option value="{{ i.UDISEcode }}">{{ i.UDISEcode }}</option>
+{% endfor %}	
+</select>
+ <input type="submit" name="ShowDetails" value="save" />
+ 
+
+</form></center>
+
+{% endblock %}

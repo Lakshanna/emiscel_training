@@ -2,6 +2,7 @@
 {% block content %}
 <!-- <img src="site_media/media/{{a.photo}}" height="100" width="10" ></img>
  -->
+
 <center>
 
 <form  action ='calc1' method="POST">{% csrf_token %}
@@ -14,14 +15,28 @@ Management:<input type='text' name='mgntname' value={{schoolrec.Management}}>
 Category:<input type='text' name='cater' value={{schoolrec.Category}}>
 <table>
 <tr><td>
-Girls Strength:<input type='number' name='gstr' value={{schoolrec.Girlsstrength}} max='99' min='0' size=2></td><td>
+Girls Strength:<input type='number' name='gstr' value={{schoolrec.Girlsstrength}} max='10000' min='0' size=2></td><td>
 
-Boys Strength:<input type='number' name='bstr' value={{schoolrec.Boysstrength}}  max='99' min='0'></td></tr><tr><td>
+Boys Strength:<input type='number' name='bstr' value={{schoolrec.Boysstrength}}  max='10000' min='0'></td></tr><tr><td>
 
-Girls Toilet:<input type='number' name='gtoi' value={{schoolrec.Girlstoilet}} max='99' min='0'></td><td>Boys Toilet:<input type='number' name='btoi' value={{schoolrec.Boystoilet}}></td></tr><tr><td>
-Girls Working:<input type='number' name='gwork' value={{schoolrec.Girlsworking}} max='99' min='0'></td><td>
-Boys Working:<input type='number' name='bwork' value={{schoolrec.Boysworking}} max='99' min='0'></td></tr></table>
-<input type="submit" name="Show" value="save" />
+Girls Toilet:<input type='number' name='gtoi' value={{schoolrec.Girlstoilet}} max='10000' min='0'></td><td>Boys Toilet:<input type='number' name='btoi' value={{schoolrec.Boystoilet}}></td></tr><tr><td>
+Girls Functional Toilets:<input type='number' name='gwork' value={{schoolrec.Girlsworking}} max='10000' min='0'></td><td>
+Boys Functional Toilets:<input type='number' name='bwork' value={{schoolrec.Boysworking}} max='10000' min='0'></td></tr></table>
+
+
+<!-- <button onclick="myFunction()">Try it</button> -->
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+    if ( {{schoolrec.Girlsworking}}=0 ) {
+        document.getElementById("demo").innerHTML = "Good day";
+    }
+}
+</script>
+
+<input onclick="myFunction()" type="submit" name="Show" value="save" />
  	
 </form></center>
 
